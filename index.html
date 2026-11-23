@@ -598,7 +598,13 @@ body.lb-open{overflow:hidden}
 .tag.tg-cur{background:#E3EEF7;color:#17507A}
 .tag.tg-etc{background:#ECEBE8;color:#55524C}
 .st{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:var(--r-pill);font-size:11.5px;font-weight:700;background:var(--amber-50);color:#8A6212;border:1px solid #E8D3A6;vertical-align:2px}
-.news-filter{display:flex;flex-wrap:wrap;gap:6px;margin:-12px 0 16px}
+.news-filter{display:flex;flex-wrap:wrap;gap:6px;margin:-12px 0 16px;align-items:center}
+.nf-sep{width:1px;height:22px;background:var(--line);margin:0 6px}
+.chip.nf-bg{border-color:#BFDCCB;color:var(--green-900)}
+.chip.nf-bg.sub{background:#F3F8F5;font-weight:500}
+.chip.nf-bg.on{background:var(--green-700);border-color:var(--green-700);color:#fff}
+.chip.nf-cur{border-color:#C3D8EA;color:#17507A}.chip.nf-cur.on{background:#17507A;border-color:#17507A;color:#fff}
+.chip.nf-etc{border-color:#D9D6D0;color:#55524C}.chip.nf-etc.on{background:#55524C;border-color:#55524C;color:#fff}
 .post-head .type{font-size:13.5px;font-weight:600;color:var(--text-soft);margin-left:8px}
 .post-sum{font-size:16.5px;line-height:1.85}
 .post-sum p+p{margin-top:12px}
@@ -898,8 +904,8 @@ body.lb-open{overflow:hidden}
         <table>
           <thead><tr><th>유형</th><th>활동</th><th>운영 주기</th><th class="num">크레딧</th><th class="num">적립 한도</th></tr></thead>
           <tbody>
-            <tr><td class="grp" rowspan="2">공모·경진대회</td><td>교내외 GR 관련 공모전·경진대회 출품</td><td>수시</td><td class="num">3</td><td class="num" rowspan="2">합산 1회</td></tr>
-            <tr><td>교내외 GR 관련 공모전·경진대회 수상</td><td>수시</td><td class="num">5</td></tr>
+            <tr><td class="grp" rowspan="2">공모·경진대회</td><td>교내외 GR 관련 공모전·경진대회 출품</td><td>수시</td><td class="num">3</td><td class="num">1회</td></tr>
+            <tr><td>교내외 GR 관련 공모전·경진대회 수상</td><td>수시</td><td class="num">5</td><td class="num">1회</td></tr>
             <tr class="req"><td class="grp" rowspan="2">실무역량</td><td><span class="badge b-req">필수</span> GR 기술강습회</td><td>연 2회</td><td class="num">3</td><td class="num">2회</td></tr>
             <tr><td>GR 전문가 초청 강연</td><td>연 4회</td><td class="num">2</td><td class="num">3회</td></tr>
             <tr><td class="grp">국제교류</td><td>해외 GR 전문가 초청 특강</td><td>연 1회</td><td class="num">3</td><td class="num">2회</td></tr>
@@ -1128,7 +1134,7 @@ body.lb-open{overflow:hidden}
   <section class="sec" id="news-notice">
     <div class="wrap">
       <div class="sec-head"><span class="eyebrow">Notice</span><h2 class="h-sec mt8">공지</h2></div>
-      <div class="chips news-filter" id="news-filter"><button class="chip on" data-v="">전체</button><button class="chip" data-v="비교과">비교과</button><button class="chip" data-v="교과">교과</button><button class="chip" data-v="기타">기타</button></div>
+      <div class="chips news-filter" id="news-filter"><button class="chip on" data-v="">전체</button><span class="nf-sep"></span><button class="chip nf-bg" data-v="비교과">비교과 전체</button><button class="chip nf-bg sub" data-v="비교과:공모·경진대회">공모·경진대회</button><button class="chip nf-bg sub" data-v="비교과:실무역량">실무역량</button><button class="chip nf-bg sub" data-v="비교과:국제교류">국제교류</button><button class="chip nf-bg sub" data-v="비교과:현장실습">현장실습</button><button class="chip nf-bg sub" data-v="비교과:취·창업">취·창업</button><button class="chip nf-bg sub" data-v="비교과:학술·연구">학술·연구</button><span class="nf-sep"></span><button class="chip nf-cur" data-v="교과">교과</button><button class="chip nf-etc" data-v="기타">기타</button></div>
       <ul class="news" id="news-all"></ul>
       <h3 class="h-sub mt40" id="news-calendar">사업단 일정</h3>
       <p class="soft small mt8" style="margin-bottom:16px">일정을 누르면 날짜·시간·장소와 내용을 볼 수 있습니다.</p>
@@ -1207,6 +1213,7 @@ const LINKS = {
 //
 //    id       영문·숫자·하이픈 (상세 페이지 주소에 쓰임, 한 번 정하면 바꾸지 않기)
 //    tag      "비교과" | "교과" | "기타"
+//    cat      비교과 유형 (비교과만): "공모·경진대회" | "실무역량" | "국제교류" | "현장실습" | "취·창업" | "학술·연구"
 //    type     세부 분류 (선택, 예: 현장견학 · 전문가 초청 강연 · 기술강습회)
 //    title    제목
 //    date     "YYYY-MM-DD" (캘린더에 표시)   end  여러 날 행사의 마지막 날 (선택)
@@ -1220,7 +1227,7 @@ const LINKS = {
 const POSTS = [
   {
     id: "2026-12-04-gr-job-fair",
-    tag: "비교과", type: "취업박람회",
+    tag: "비교과", cat: "취·창업", type: "취업박람회",
     title: "2026 녹색건축한마당 그린리모델링 취업박람회",
     date: "2026-12-04", time: "10:00 ~ 17:00", place: "서울드래곤시티 한라홀3",
     apply: "사전등록 후 입장 (입장 시 명찰·리플렛·경품추첨권 제공) · 중앙대 GR 인재양성 플랫폼 예비등록생 참여 시 비교과 3크레딧 적립",
@@ -1231,7 +1238,7 @@ const POSTS = [
   },
   {
     id: "2026-12-02-sketchup-pv",
-    tag: "비교과", type: "기술강습회",
+    tag: "비교과", cat: "실무역량", type: "기술강습회",
     title: "그린리모델링 기술강습회: 스케치업 모델링을 통한 건물 태양광 산출량 예측",
     date: "2026-12-02", time: "15:00 ~ 18:00", place: "208관 4층 CAD실",
     speaker: "백승효 (목원대학교 건축학부 교수)",
@@ -1242,7 +1249,7 @@ const POSTS = [
   },
   {
     id: "2026-11-23-green-building",
-    tag: "비교과", type: "전문가 초청 강연",
+    tag: "비교과", cat: "실무역량", type: "전문가 초청 강연",
     title: "그린리모델링 전문가 초청 강연: 지속가능한 환경, 녹색건축 - 친환경건축의 동향 및 실무사례",
     date: "2026-11-23", time: "13:00 ~ 15:00", place: "310관 B501호",
     speaker: "원종연 ((주)네드 대표이사)",
@@ -1252,7 +1259,7 @@ const POSTS = [
   },
   {
     id: "2026-10-01-haeahn-visit",
-    tag: "비교과", type: "현장견학",
+    tag: "비교과", cat: "현장실습", type: "현장견학",
     title: "지속가능한 도시재생·도시정비형 재개발 설계사무소 탐방",
     date: "2026-10-01", time: "13:00 ~ 17:30 (집결·이동 포함)",
     place: "해안건축 (서울 강남구 봉은사로 236) · 제2공학관(208관) 앞 집결",
@@ -1290,6 +1297,7 @@ const POSTS = [
       .replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>')+'</p>').join('');
   }
   const tagCls = t=>({'교과':' tg-cur','기타':' tg-etc'}[t]||'');
+  const tagTxt = (p,full)=>p.tag==='비교과'&&p.cat ? (full?'비교과 · ':'')+p.cat : p.tag;
 
   // ---------- 소식 DB ----------
   const today = new Date(), tk = dayKey(today);
@@ -1304,12 +1312,13 @@ const POSTS = [
   function item(p){
     const meta = [when(p), p.time, p.place].filter(Boolean).map(esc).join(' · ');
     const d = p.st ? dateBox(p.st) : '<span class="d none"><b>공지</b></span>';
-    return `<li><a href="#post/${p.id}">${d}<span class="tag${tagCls(p.tag)}">${esc(p.tag)}</span><span class="t">${esc(p.title)}${badge(p)}</span><span class="m">${meta}</span></a></li>`;
+    return `<li><a href="#post/${p.id}">${d}<span class="tag${tagCls(p.tag)}">${esc(tagTxt(p))}</span><span class="t">${esc(p.title)}${badge(p)}</span><span class="m">${meta}</span></a></li>`;
   }
   const empty = '<li><div><span class="d none"><b>공지</b></span><span class="tag">안내</span><span class="t">새 소식이 곧 올라옵니다.</span></div></li>';
   let filter = '';
   function renderNews(){
-    const all = filter ? P.filter(p=>p.tag===filter) : P;
+    const [ft,fc] = filter.split(':');
+    const all = filter ? P.filter(p=>p.tag===ft && (!fc || p.cat===fc)) : P;
     $('#news-home').innerHTML = P.length ? P.slice(0,3).map(item).join('') : empty;
     $('#news-all').innerHTML  = all.length ? all.map(item).join('') : empty;
   }
@@ -1365,7 +1374,7 @@ const POSTS = [
     const url = safeUrl(p.url), newer = P[i-1], older = P[i+1];
     const rows = [['날짜',when(p)],['시간',p.time],['장소',p.place],['강사',p.speaker],['신청',p.apply]].filter(r=>r[1]);
     v.innerHTML = `
-      <div class="post-head"><span class="tag${tagCls(p.tag)}">${esc(p.tag)}</span>${p.type?`<span class="type">${esc(p.type)}</span>`:''}${badge(p)}<h2>${esc(p.title)}</h2></div>
+      <div class="post-head"><span class="tag${tagCls(p.tag)}">${esc(tagTxt(p,1))}</span>${p.type?`<span class="type">${esc(p.type)}</span>`:''}${badge(p)}<h2>${esc(p.title)}</h2></div>
       ${rows.length?`<dl class="post-info">${rows.map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl>`:''}
       ${p.summary?`<h3 class="h-sub" style="margin-bottom:10px">${esc(p.label||'내용')}</h3><div class="post-sum">${fmtBody(p.summary)}</div>`:''}
       ${url?`<div class="btn-row mt24"><a class="btn btn-fill" href="${esc(url)}" target="_blank" rel="noopener">${esc(p.urlLabel||'바로가기')} ↗</a></div>`:''}
