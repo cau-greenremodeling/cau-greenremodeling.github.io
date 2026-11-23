@@ -652,7 +652,6 @@ body.lb-open{overflow:hidden}
         <ul class="drop"><li><a href="#news/notice">공지</a></li><li><a href="#news/gallery">활동 갤러리</a></li></ul></li>
       <li><a href="#archive" data-nav="archive">자료실</a></li>
     </ul>
-    <a class="btn btn-fill nav-cta" data-link="preRegister" href="#">예비등록</a>
     <button class="burger" id="burger" aria-label="메뉴 열기" aria-expanded="false"><span></span></button>
   </div>
 </header>
@@ -1202,9 +1201,6 @@ body.lb-open{overflow:hidden}
       <b>중앙대학교 건축학부 그린리모델링 인재양성 플랫폼 사업단</b>
       <p>문의 <a href="mailto:grprogram.cau@gmail.com">grprogram.cau@gmail.com</a></p>
     </div>
-    <div class="foot-links">
-      <a class="btn btn-ghost-w" data-link="preRegister" href="#">예비등록</a>
-    </div>
     <div class="foot-bottom">본 사업은 국토안전관리원 그린리모델링 인재양성 플랫폼 사업의 지원을 받아 운영됩니다.</div>
   </div>
 </footer>
@@ -1238,7 +1234,7 @@ const EMBEDS = {
 };
 
 // 3) 소식 DB — 여기 한 곳에 적으면 공지 목록 · 사업단 일정(캘린더) · 활동 갤러리에 함께 나옵니다
-//    어디서 누르든 같은 상세 페이지(날짜 · 시간 · 장소 · 내용 요약 · 사진)가 열립니다
+//    어디서 누르든 같은 상세 페이지(날짜 · 시간 · 장소 · 강의 개요/프로그램 목적 · 사진)가 열립니다
 //
 //    id       영문·숫자·하이픈 (상세 페이지 주소에 쓰임, 한 번 정하면 바꾸지 않기)
 //    tag      "비교과" | "교과" | "기타"
@@ -1247,7 +1243,8 @@ const EMBEDS = {
 //    date     "YYYY-MM-DD" (캘린더에 표시)   end  여러 날 행사의 마지막 날 (선택)
 //    time     "13:00 ~ 15:00" (선택)          place  장소 (선택)
 //    speaker  강사 · 안내 (선택)               apply  신청 안내 (선택)
-//    summary  내용 요약 — 빈 줄을 넣으면 문단이 나뉩니다
+//    label    본문 제목 (선택, 예: "강의 개요" · "프로그램 목적" — 비우면 "내용")
+//    summary  본문 — 계획서·보고서의 강의 개요/프로그램 목적을 그대로 붙여넣기 (빈 줄 = 문단 구분)
 //    url      외부 링크 (선택, 상세 페이지에 버튼으로 표시)
 //    photos   사진 경로 목록 (선택) — 비교과 건에 사진을 넣으면 활동 갤러리에 자동 추가 (첫 사진이 대표)
 //             사진은 GitHub 저장소 gallery/<id>/ 폴더에 올리고 경로를 적어 주세요
@@ -1259,7 +1256,8 @@ const POSTS = [
     date: "2026-12-02", time: "15:00 ~ 18:00", place: "208관 4층 CAD실",
     speaker: "백승효 (목원대학교 건축학부 교수)",
     apply: "2026.11.12(목) ~ 12.01(화) · 레인보우시스템 비교과 프로그램에서 프로그램명 검색 후 신청 (정원 34명 · 참가비 무료)",
-    summary: "SketchUp 건물 모델에 태양광 패널을 배치하고, 전용 플러그인으로 태양광 발전량과 에너지 자립률(ZEB)을 산정하는 실습형 기술강습회입니다.\n\n제로에너지 건축물 이론과 태양광 시스템 개요를 배운 뒤, 목표 에너지 자립률을 달성하는 패널 배치를 직접 설계해 봅니다.",
+    label: "강의 개요",
+    summary: "SketchUp으로 제공된 건물 모델에 태양광 패널을 배치하고, 전용 플러그인을 활용해 태양광 발전량과 에너지 자립률(ZEB)을 산정하는 실습형 기술강습회입니다.\n\n학생들은 목표 에너지 자립률 달성을 위한 패널 배치를 직접 설계하며 태양광 발전 용량 산정과 에너지 자립률 개념을 익힙니다.",
     photos: []
   },
   {
@@ -1268,7 +1266,8 @@ const POSTS = [
     title: "그린리모델링 전문가 초청 강연: 지속가능한 환경, 녹색건축 - 친환경건축의 동향 및 실무사례",
     date: "2026-11-23", time: "13:00 ~ 15:00", place: "310관 B501호",
     speaker: "원종연 ((주)네드 대표이사)",
-    summary: "2050 탄소중립을 위한 국내외 녹색건축 정책과 녹색건축·건축물에너지효율등급·제로에너지건축물(ZEB) 인증제도를 살펴보고, 패시브·액티브·신재생에너지 기술과 AI 기반 에너지 성능 컨설팅 등 최신 친환경 설계 동향을 소개합니다.\n\n판교 제2테크노밸리 기업지원허브, 고덕 온빛채, 광명 시립 철산어린이집(공공 그린리모델링) 등 실무사례를 통해 친환경건축·그린리모델링 현업을 알아봅니다.",
+    label: "강의 개요",
+    summary: "2050 탄소중립 달성을 위한 국내·외 녹색건축 정책 방향과 녹색건축·건축물에너지효율등급·제로에너지건축물(ZEB) 인증제도의 체계를 살펴봅니다.\n\n패시브·액티브·신재생에너지 기술을 통한 제로에너지 달성 개념과 AI 기반 에너지 성능 컨설팅 등 최신 친환경 설계 기술 동향을 소개합니다.\n\n판교 제2테크노밸리 기업지원허브(ZEB 본인증), 고덕 온빛채(고층 공동주택 ZEB 3등급), 광명 시립 철산어린이집(공공 그린리모델링) 등 실무사례를 통해 친환경건축·그린리모델링 현업에 대한 이해와 진로 시야를 넓힙니다.",
     photos: []
   },
   {
@@ -1277,7 +1276,8 @@ const POSTS = [
     title: "지속가능한 도시재생·도시정비형 재개발 설계사무소 탐방",
     date: "2026-10-01", time: "13:00 ~ 17:30 (집결·이동 포함)",
     place: "해안건축 (서울 강남구 봉은사로 236) · 제2공학관(208관) 앞 집결",
-    summary: "건축설계사무소 해안건축을 방문해 도시재생·도시정비형 재개발 프로젝트와 설계 과정을 살펴보고, 기존 건축물과 도시환경을 지속가능하게 개선하는 건축적 접근을 배웠습니다.\n\n회사 소개, 사옥 투어, 프로젝트 사례 소개, 실무 전문가와의 질의응답 순으로 진행했으며 학생 13명이 참여했습니다.",
+    label: "프로그램 목적",
+    summary: "건축설계사무소를 방문하여 도시재생 및 도시정비사업의 주요 프로젝트와 설계 과정을 살펴보고, 기존 건축물과 도시환경을 지속가능하게 개선하기 위한 건축적 접근을 학습한다. 이를 통해 탄소중립 및 그린리모델링의 설계적 적용 가능성에 대한 이해를 높이고, 관련 분야의 실무역량과 진로 탐색 기회를 확대하고자 한다.",
     photos: []
   },
 ];
@@ -1394,7 +1394,7 @@ const POSTS = [
     v.innerHTML = `
       <div class="post-head"><span class="tag${tagCls(p.tag)}">${esc(p.tag)}</span>${p.type?`<span class="type">${esc(p.type)}</span>`:''}${badge(p)}<h2>${esc(p.title)}</h2></div>
       ${rows.length?`<dl class="post-info">${rows.map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl>`:''}
-      ${p.summary?`<h3 class="h-sub" style="margin-bottom:10px">내용 요약</h3><div class="post-sum">${fmtBody(p.summary)}</div>`:''}
+      ${p.summary?`<h3 class="h-sub" style="margin-bottom:10px">${esc(p.label||'내용')}</h3><div class="post-sum">${fmtBody(p.summary)}</div>`:''}
       ${url?`<div class="btn-row mt24"><a class="btn btn-fill" href="${esc(url)}" target="_blank" rel="noopener">바로가기 ↗</a></div>`:''}
       ${p.photos.length?`<h3 class="h-sub mt40" style="margin-bottom:14px">활동 사진 <span class="soft small">${p.photos.length}장</span></h3>
         <div class="photos">${p.photos.map((ph,j)=>`<button type="button" data-i="${j}" aria-label="사진 ${j+1} 크게 보기"><img src="${esc(ph)}" alt="${esc(p.title)} 사진 ${j+1}" loading="lazy"></button>`).join('')}</div>`:''}
