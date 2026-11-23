@@ -650,7 +650,6 @@ body.lb-open{overflow:hidden}
         <ul class="drop"><li><a href="#join/register">예비등록</a></li><li><a href="#join/guide">참여 후 이용 안내</a></li><li><a href="#join/apply">비교과 신청</a></li><li><a data-link="faq" href="#">FAQ ↗</a></li></ul></li>
       <li><a href="#news" data-nav="news">소식</a>
         <ul class="drop"><li><a href="#news/notice">공지</a></li><li><a href="#news/gallery">활동 갤러리</a></li></ul></li>
-      <li><a href="#archive" data-nav="archive">자료실</a></li>
     </ul>
     <button class="burger" id="burger" aria-label="메뉴 열기" aria-expanded="false"><span></span></button>
   </div>
@@ -661,7 +660,6 @@ body.lb-open{overflow:hidden}
   <h4>이수 안내</h4><a href="#curriculum/system">이수 체계</a><a href="#curriculum/course">교과 영역</a><a href="#curriculum/extra">비교과 영역</a><a href="#curriculum/benefit">혜택 (마이크로디그리·장학금)</a>
   <h4>참여하기</h4><a href="#join/register">예비등록</a><a href="#join/guide">참여 후 이용 안내</a><a href="#join/apply">비교과 신청</a><a data-link="faq" href="#">FAQ ↗</a>
   <h4>소식</h4><a href="#news/notice">공지</a><a href="#news/gallery">활동 갤러리</a>
-  <h4>자료실</h4><a href="#archive">자료실</a>
   <a class="btn btn-fill" data-link="preRegister" href="#">예비등록 하기</a>
 </nav>
 
@@ -1159,29 +1157,6 @@ body.lb-open{overflow:hidden}
   <section class="sec"><div class="wrap"><article class="post" id="post-view"></article></div></section>
 </div>
 
-<!-- =========================================================
-     05 자료실
-     ========================================================= -->
-<div data-page="archive">
-  <section class="page-head">
-    <div class="wrap">
-      <div class="crumb"><a href="#home">홈</a> / 자료실</div>
-      <h1>자료실</h1>
-      <p>안내서, 홍보물, 각종 양식을 내려받을 수 있습니다.</p>
-    </div>
-  </section>
-  <section class="sec">
-    <div class="wrap">
-      <div class="grid g3">
-        <div class="card folder"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></span><div><b>안내서</b><span>학생상세안내서(핸드북) PDF</span></div></div>
-        <div class="card folder"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></span><div><b>홍보물</b><span>리플렛 · 포스터 · 카드뉴스</span></div></div>
-        <div class="card folder"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></span><div><b>양식</b><span>소급인정 신청서 · GR 주제 등록서 · 각종 증빙 양식</span></div></div>
-      </div>
-      <div class="embed mt24" data-embed="drive" data-height="520"></div>
-    </div>
-  </section>
-</div>
-
 </main>
 
 <!-- =========================================================
@@ -1227,13 +1202,7 @@ const LINKS = {
   rainbow:     "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureList?menuid=001002002&submode=lecture&reservegroupid=1"  // 레인보우시스템 비교과 목록
 };
 
-// 2) 임베드 — 자료실 Google Drive 폴더의 "삽입용" 주소
-const EMBEDS = {
-  // 예: "https://drive.google.com/embeddedfolderview?id=폴더ID#list"
-  drive: ""
-};
-
-// 3) 소식 DB — 여기 한 곳에 적으면 공지 목록 · 사업단 일정(캘린더) · 활동 갤러리에 함께 나옵니다
+// 2) 소식 DB — 여기 한 곳에 적으면 공지 목록 · 사업단 일정(캘린더) · 활동 갤러리에 함께 나옵니다
 //    어디서 누르든 같은 상세 페이지(날짜 · 시간 · 장소 · 강의 개요/프로그램 목적 · 사진)가 열립니다
 //
 //    id       영문·숫자·하이픈 (상세 페이지 주소에 쓰임, 한 번 정하면 바꾸지 않기)
@@ -1278,7 +1247,7 @@ const POSTS = [
     place: "해안건축 (서울 강남구 봉은사로 236) · 제2공학관(208관) 앞 집결",
     label: "프로그램 목적",
     summary: "건축설계사무소를 방문하여 도시재생 및 도시정비사업의 주요 프로젝트와 설계 과정을 살펴보고, 기존 건축물과 도시환경을 지속가능하게 개선하기 위한 건축적 접근을 학습한다. 이를 통해 탄소중립 및 그린리모델링의 설계적 적용 가능성에 대한 이해를 높이고, 관련 분야의 실무역량과 진로 탐색 기회를 확대하고자 한다.",
-    photos: []
+    photos: ["gallery/2026-10-01-haeahn-visit/01.jpg", "gallery/2026-10-01-haeahn-visit/02.jpg", "gallery/2026-10-01-haeahn-visit/03.jpg", "gallery/2026-10-01-haeahn-visit/04.jpg"]
   },
 ];
 
@@ -1295,13 +1264,6 @@ const POSTS = [
     const url = LINKS[a.dataset.link];
     if(url){ a.href=url; a.target='_blank'; a.rel='noopener'; }
     else{ a.classList.add('is-pending'); a.addEventListener('click',e=>{e.preventDefault();showToast('링크 준비 중입니다');}); }
-  });
-
-  // 임베드
-  $$('[data-embed]').forEach(box=>{
-    const url = EMBEDS[box.dataset.embed];
-    if(url){ const f=document.createElement('iframe'); f.src=url; f.height=box.dataset.height||500; f.loading='lazy'; f.title=box.dataset.embed; box.appendChild(f); }
-    else{ box.innerHTML='<div class="embed-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>자료가 곧 업로드됩니다.</div>'; }
   });
 
   // ---------- 공통 도우미 ----------
@@ -1530,7 +1492,7 @@ const POSTS = [
     $$('[data-nav]').forEach(a=>a.classList.toggle('active', a.dataset.nav===(DETAIL[p]?'news':p)));
     document.body.classList.remove('drawer-open'); $('#burger').setAttribute('aria-expanded','false');
     closeLb();
-    const titles={home:'',about:'사업 안내',curriculum:'이수 안내',join:'참여하기',news:'소식',archive:'자료실',post:'소식'};
+    const titles={home:'',about:'사업 안내',curriculum:'이수 안내',join:'참여하기',news:'소식',post:'소식'};
     let title = titles[p];
     if(DETAIL[p]){
       const r = DETAIL[p](sub); if(r) title = r.title;
