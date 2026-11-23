@@ -240,7 +240,7 @@ body.drawer-open{overflow:hidden}
 .goal p{font-size:15px;color:var(--text-soft)}
 
 
-/* ---------- 이수 체계도 ---------- */
+/* ---------- 이수 체계 ---------- */
 .flow{display:grid;gap:16px}
 @media(min-width:900px){.flow-top{grid-template-columns:1fr auto 1fr}}
 .flow-top{display:grid;gap:12px;align-items:stretch}
@@ -448,7 +448,7 @@ footer a{color:#fff}
 .ci.req{font-weight:700}
 .ci .gr{font-size:12px;color:var(--text-soft)}
 
-/* ---------- 인터랙티브 이수체계도 ---------- */
+/* ---------- 인터랙티브 이수 체계 ---------- */
 .map-tools{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:16px 0 12px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font:inherit;font-size:13.5px;font-weight:600;padding:6px 14px;border-radius:var(--r-pill);border:1px solid var(--line);background:#fff;color:var(--text);cursor:pointer;transition:.15s}
@@ -544,7 +544,7 @@ footer a{color:#fff}
       <li><a href="#about" data-nav="about">사업 안내</a>
         <ul class="drop"><li><a href="#about/overview">추진 배경</a></li><li><a href="#about/goals">추진 목적</a></li><li><a href="#about/roadmap">연차별 로드맵</a></li><li><a href="#about/org">조직도</a></li></ul></li>
       <li><a href="#curriculum" data-nav="curriculum">이수 안내</a>
-        <ul class="drop"><li><a href="#curriculum/system">이수 체계도</a></li><li><a href="#curriculum/course">교과 영역</a></li><li><a href="#curriculum/extra">비교과 영역</a></li><li><a href="#curriculum/benefit">혜택 (마이크로디그리·장학금)</a></li></ul></li>
+        <ul class="drop"><li><a href="#curriculum/system">이수 체계</a></li><li><a href="#curriculum/course">교과 영역</a></li><li><a href="#curriculum/extra">비교과 영역</a></li><li><a href="#curriculum/benefit">혜택 (마이크로디그리·장학금)</a></li></ul></li>
       <li><a href="#join" data-nav="join">참여하기</a>
         <ul class="drop"><li><a href="#join/register">예비등록</a></li><li><a href="#join/guide">참여 후 이용 안내</a></li><li><a href="#join/apply">비교과 신청</a></li><li><a data-link="faq" href="#">FAQ ↗</a></li></ul></li>
       <li><a href="#news" data-nav="news">소식</a>
@@ -558,7 +558,7 @@ footer a{color:#fff}
 
 <nav class="drawer" id="drawer" aria-label="모바일 메뉴">
   <h4>사업 안내</h4><a href="#about/overview">추진 배경</a><a href="#about/goals">추진 목적</a><a href="#about/roadmap">연차별 로드맵</a><a href="#about/org">조직도</a>
-  <h4>이수 안내</h4><a href="#curriculum/system">이수 체계도</a><a href="#curriculum/course">교과 영역</a><a href="#curriculum/extra">비교과 영역</a><a href="#curriculum/benefit">혜택 (마이크로디그리·장학금)</a>
+  <h4>이수 안내</h4><a href="#curriculum/system">이수 체계</a><a href="#curriculum/course">교과 영역</a><a href="#curriculum/extra">비교과 영역</a><a href="#curriculum/benefit">혜택 (마이크로디그리·장학금)</a>
   <h4>참여하기</h4><a href="#join/register">예비등록</a><a href="#join/guide">참여 후 이용 안내</a><a href="#join/apply">비교과 신청</a><a data-link="faq" href="#">FAQ ↗</a>
   <h4>소식</h4><a href="#news/notice">공지</a><a href="#news/gallery">활동 갤러리</a>
   <h4>자료실</h4><a href="#archive">자료실</a>
@@ -726,14 +726,14 @@ footer a{color:#fff}
       <div class="crumb"><a href="#home">홈</a> / 이수 안내</div>
       <h1>이수 안내</h1>
       <p>교과와 비교과 두 축을 모두 충족하면 특성화 프로그램 이수자가 됩니다.</p>
-      <div class="subtabs"><a href="#curriculum/system">이수 체계도</a><a href="#curriculum/course">교과 영역</a><a href="#curriculum/extra">비교과 영역</a><a href="#curriculum/benefit">혜택</a></div>
+      <div class="subtabs"><a href="#curriculum/system">이수 체계</a><a href="#curriculum/course">교과 영역</a><a href="#curriculum/extra">비교과 영역</a><a href="#curriculum/benefit">혜택</a></div>
     </div>
   </section>
 
-  <!-- 이수 체계도 -->
+  <!-- 이수 체계 -->
   <section class="sec" id="curriculum-system">
     <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">Structure</span><h2 class="h-sec mt8">이수 체계도</h2>
+      <div class="sec-head"><span class="eyebrow">Structure</span><h2 class="h-sec mt8">이수 체계</h2>
         <p class="soft">특성화 프로그램은 교과와 비교과 두 축으로 이루어집니다. 두 과정을 모두 충족하면 특성화 프로그램 이수자가 되며, 이수 과정에서 마이크로디그리(Green → Silver → Gold)를 단계별로 취득합니다.</p></div>
       <div class="flow">
         <div class="flow-top">
@@ -779,7 +779,7 @@ footer a{color:#fff}
       <div class="map-legend"><span><i style="--c:var(--red)"></i>건축학</span><span><i style="--c:#E08A2E"></i>공통</span><span><i style="--c:var(--blue)"></i>건축공학</span><span><i style="--c:var(--green-700)"></i>현장실습</span><span><b style="color:var(--amber)">◆</b> 특성화 필수</span><span><b style="color:var(--amber)">★</b> 신설 (그린리모델링 2027-1 · 건물성능분석 2027)</span><span>숫자 = 학점</span></div>
       <ul class="note mt8"><li>표준현장실습은 방학 중 4주↑ 2·3학점, 학기 중 12주↑ 12·15학점이며, 학기 중 12주 이상 이수하면 비교과 15크레딧도 함께 인정됩니다.</li></ul>
 
-      <h3 class="h-sub mt40">교과 이수체계도 <span class="soft small">· 과목을 눌러 내 이수 계획을 만들어 보세요</span></h3>
+      <h3 class="h-sub mt40">교과 이수 체계 <span class="soft small">· 과목을 눌러 내 이수 계획을 만들어 보세요</span></h3>
       <div class="map-tools">
         <span class="lab">전공</span>
         <div class="chips" id="map-major"><button class="chip on" data-v="all">전체</button><button class="chip" data-v="ar">건축학</button><button class="chip" data-v="ae">건축공학</button></div>
@@ -1258,7 +1258,7 @@ const NEWS = [
     $$('.ev').forEach(x=>x.classList.toggle('on', x.id===b.dataset.v));
   }));
 
-  // 교과 이수체계도 (인터랙티브)
+  // 교과 이수 체계 (인터랙티브)
   // row: ar 건축학 · cm 공통 · ae 건축공학 · fp 현장실습 / k: b 기초 · a 심화 / sem: '학년-학기'
   const C = [
     ['건축기초설계1','cm','1-1','b',3,'전공필수'],['건축의이해','cm','1-1','b',3,'전공필수'],
