@@ -449,7 +449,10 @@ footer a{color:#fff}
 .ci .gr{font-size:12px;color:var(--text-soft)}
 
 /* ---------- 인터랙티브 이수 체계 ---------- */
-.map-tools{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:16px 0 12px}
+.map-tools{display:flex;flex-wrap:wrap;gap:10px 0;align-items:center;margin:16px 0 12px}
+.map-tools .grp{display:flex;align-items:center;gap:10px;padding-right:20px;margin-right:20px;border-right:1px solid var(--line)}
+.map-tools .grp:last-of-type{border-right:0}
+@media(max-width:640px){.map-tools .grp{width:100%;border-right:0;margin-right:0;padding-right:0;align-items:flex-start}.map-tools .lab{flex:0 0 28px;padding-top:7px}}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font:inherit;font-size:13.5px;font-weight:600;padding:6px 14px;border-radius:var(--r-pill);border:1px solid var(--line);background:#fff;color:var(--text);cursor:pointer;transition:.15s}
 .chip:hover{border-color:var(--green-700)}
@@ -853,10 +856,10 @@ body.lb-open{overflow:hidden}
 
       <h3 class="h-sub mt40">교과 이수 체계 <span class="soft small">· 과목을 눌러 내 이수 계획을 만들어 보세요</span></h3>
       <div class="map-tools">
-        <span class="lab">전공</span>
-        <div class="chips" id="map-major"><button class="chip on" data-v="all">전체</button><button class="chip" data-v="ar">건축학</button><button class="chip" data-v="ae">건축공학</button></div>
-        <span class="lab">강조</span>
-        <div class="chips" id="map-hl"><button class="chip on" data-v="none">없음</button><button class="chip" data-v="basic">기초</button><button class="chip" data-v="adv">심화</button><button class="chip" data-v="req">특성화 필수</button><button class="chip" data-v="new">신설</button></div>
+        <div class="grp"><span class="lab">전공</span>
+        <div class="chips" id="map-major"><button class="chip on" data-v="all">전체</button><button class="chip" data-v="ar">건축학</button><button class="chip" data-v="ae">건축공학</button></div></div>
+        <div class="grp"><span class="lab">강조</span>
+        <div class="chips" id="map-hl"><button class="chip on" data-v="none">없음</button><button class="chip" data-v="basic">기초</button><button class="chip" data-v="adv">심화</button><button class="chip" data-v="req">특성화 필수</button><button class="chip" data-v="new">신설</button></div></div>
         <button class="chip" id="map-reset" style="margin-left:auto">선택 초기화</button>
       </div>
       <div class="map-wrap"><div class="map" id="map"></div></div>
@@ -877,7 +880,6 @@ body.lb-open{overflow:hidden}
         <div class="callout"><h3>GR 관련 주제 인정 · 건축시스템설계 · 건축연구</h3><p>분반과 관계없이 탄소중립건축·그린리모델링 관련 주제로 프로젝트·연구를 수행하면 심화 교과목으로 인정합니다. 학기 초 주제를 사업단에 등록해 사전 심사를 받고, 학기 말 결과물을 확인한 뒤 최종 인정합니다.</p></div>
         <div class="callout"><h3>소급 인정</h3><p>2026학년도 여름학기(하계 계절학기)까지 이수한 기초 교과목은 최대 6학점까지 소급 인정합니다. 사업단에서 이수 내역을 조회해 반영하므로 따로 제출할 필요가 없습니다. 2026학년도 2학기부터 이수하는 특성화 교과목은 예비등록 여부와 관계없이 인정됩니다.</p></div>
       </div>
-      <div class="callout amber mt16"><h3>수강 계획 팁</h3><p>4학년 1학기는 특성화 필수과목이 집중되는 학기입니다. 표준현장실습은 3학년 2학기에 계획하는 것이 현실적입니다.</p></div>
     </div>
   </section>
 
@@ -916,7 +918,6 @@ body.lb-open{overflow:hidden}
       <ul class="note mt8">
         <li>필수 프로그램(1개 이상 이수)</li>
         <li>공모전은 교내외 모두 인정</li>
-        <li>세부 인정 기준은 운영위원회 결정에 따라 조정될 수 있습니다</li>
       </ul>
 
       <h3 class="h-sub mt40">이수 경로 예시</h3>
@@ -933,7 +934,7 @@ body.lb-open{overflow:hidden}
       </div>
 
       <div class="card mt24" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
-        <div><h3 class="h-sub">참여 방법</h3><p class="soft small mt8">비교과 프로그램 중 일부는 레인보우시스템에서 신청할 수 있으며, 레인보우시스템 마일리지도 별도로 받을 수 있습니다. 레인보우시스템에서 <b>“GR 플랫폼 비교과”</b>를 검색해 보세요.</p></div>
+        <div><h3 class="h-sub">참여 방법</h3><p class="soft small mt8">비교과 프로그램 중 일부는 레인보우시스템에서 신청할 수 있으며, 레인보우시스템 마일리지도 별도로 받을 수 있습니다. 레인보우시스템에서 <b>“그린리모델링”</b>를 검색해 보세요.</p></div>
         <a class="btn btn-fill" data-link="rainbow" href="#">레인보우시스템 바로가기</a>
       </div>
     </div>
@@ -969,7 +970,6 @@ body.lb-open{overflow:hidden}
             <li>표준현장실습(GR 실무 트랙) 및 GR 산학인턴십 인건비 지원</li>
             <li>협약기업 연계 취업 추천</li>
           </ul>
-          <p class="small soft">지원 금액과 신청 방법은 확정되는 대로 안내합니다.</p>
         </div>
       </div>
     </div>
@@ -1087,7 +1087,7 @@ body.lb-open{overflow:hidden}
       </div>
       <ul class="note mt16">
         <li>파일명은 「학번_이름_유형」으로 저장해 주세요. (예: 20231234_홍길동_공모경진)</li>
-        <li>인정되지 않으면 과제 코멘트로 사유를 안내합니다. 세부 기준은 e-Class [안내·양식] 게시판의 증빙 방법 글을 확인해 주세요.</li>
+        <li>인정되지 않으면 과제 코멘트로 사유를 안내합니다. 세부 기준은 e-Class [이용 안내] 게시판의 글을 확인해 주세요.</li>
       </ul>
       <div class="center mt24"><a class="btn btn-fill" data-link="eclass" href="#">e-Class 바로가기</a></div>
     </div>
@@ -1102,7 +1102,7 @@ body.lb-open{overflow:hidden}
       </div>
       <div class="grid g3">
         <div class="apply-card"><span class="ic-num">1</span><h3>공지 확인</h3><p>프로그램별 모집 기간과 신청 방법은 홈페이지 공지에서 안내합니다. 레인보우시스템 신청 대상 여부도 공지에 표기합니다.</p></div>
-        <div class="apply-card"><span class="ic-num">2</span><h3>레인보우시스템 신청</h3><p>레인보우시스템에 로그인한 뒤 비교과 프로그램 목록에서 <b style="color:#fff">“GR 플랫폼 비교과”</b>를 검색하면 사업단 프로그램만 모아 볼 수 있습니다.</p></div>
+        <div class="apply-card"><span class="ic-num">2</span><h3>레인보우시스템 신청</h3><p>레인보우시스템에 로그인한 뒤 비교과 프로그램 목록에서 <b style="color:#fff">“그린리모델링”</b>를 검색하면 사업단 프로그램만 모아 볼 수 있습니다.</p></div>
         <div class="apply-card"><span class="ic-num">3</span><h3>크레딧 + 마일리지</h3><p>참여한 프로그램은 사업단 비교과 크레딧으로 인정되고, 레인보우시스템 마일리지는 그와 별도로 적립됩니다.</p></div>
       </div>
       <p class="note mt16" style="color:var(--text-w-soft)">※ 레인보우시스템 대상이 아닌 프로그램은 공지에 안내된 방법으로 신청해 주세요.</p>
@@ -1214,10 +1214,21 @@ const LINKS = {
 //    speaker  강사 · 안내 (선택)               apply  신청 안내 (선택)
 //    label    본문 제목 (선택, 예: "강의 개요" · "프로그램 목적" — 비우면 "내용")
 //    summary  본문 — 계획서·보고서의 강의 개요/프로그램 목적을 그대로 붙여넣기 (빈 줄 = 문단 구분)
-//    url      외부 링크 (선택, 상세 페이지에 버튼으로 표시)
+//    url      외부 링크 (선택, 상세 페이지에 버튼으로 표시)   urlLabel  버튼 글자 (선택, 기본 "바로가기")
 //    photos   사진 경로 목록 (선택) — 비교과 건에 사진을 넣으면 활동 갤러리에 자동 추가 (첫 사진이 대표)
 //             사진은 GitHub 저장소 gallery/<id>/ 폴더에 올리고 경로를 적어 주세요
 const POSTS = [
+  {
+    id: "2026-12-04-gr-job-fair",
+    tag: "비교과", type: "취업박람회",
+    title: "2026 녹색건축한마당 그린리모델링 취업박람회",
+    date: "2026-12-04", time: "10:00 ~ 17:00", place: "서울드래곤시티 한라홀3",
+    apply: "사전등록 후 입장 (입장 시 명찰·리플렛·경품추첨권 제공) · 중앙대 GR 인재양성 플랫폼 예비등록생 참여 시 비교과 3크레딧 적립",
+    url: "https://www.greenbuildingfestival.or.kr", urlLabel: "사전등록 하기",
+    label: "주요 내용",
+    summary: "그린리모델링 분야 학생들의 취업역량 강화를 위한 특강 실시\n참여 프로그램 운영 (이력서 사진촬영, 퍼스널컬러 진단, 지문적성검사, AI모의면접)\n\n09:30 ~ 10:00 개회식\n10:00 ~ 17:00 기업 면접 및 부대행사\n13:00 ~ 13:30 취업특강 1 (생성형AI활용 취업전략)\n14:00 ~ 15:00 채용설명회 1, 2\n15:00 ~ 16:00 취업특강 2 (NCS취업전략 꿀팁)\n16:30 ~ 17:00 경품추첨 및 폐회",
+    photos: []
+  },
   {
     id: "2026-12-02-sketchup-pv",
     tag: "비교과", type: "기술강습회",
@@ -1357,7 +1368,7 @@ const POSTS = [
       <div class="post-head"><span class="tag${tagCls(p.tag)}">${esc(p.tag)}</span>${p.type?`<span class="type">${esc(p.type)}</span>`:''}${badge(p)}<h2>${esc(p.title)}</h2></div>
       ${rows.length?`<dl class="post-info">${rows.map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl>`:''}
       ${p.summary?`<h3 class="h-sub" style="margin-bottom:10px">${esc(p.label||'내용')}</h3><div class="post-sum">${fmtBody(p.summary)}</div>`:''}
-      ${url?`<div class="btn-row mt24"><a class="btn btn-fill" href="${esc(url)}" target="_blank" rel="noopener">바로가기 ↗</a></div>`:''}
+      ${url?`<div class="btn-row mt24"><a class="btn btn-fill" href="${esc(url)}" target="_blank" rel="noopener">${esc(p.urlLabel||'바로가기')} ↗</a></div>`:''}
       ${p.photos.length?`<h3 class="h-sub mt40" style="margin-bottom:14px">활동 사진 <span class="soft small">${p.photos.length}장</span></h3>
         <div class="photos">${p.photos.map((ph,j)=>`<button type="button" data-i="${j}" aria-label="사진 ${j+1} 크게 보기"><img src="${esc(ph)}" alt="${esc(p.title)} 사진 ${j+1}" loading="lazy"></button>`).join('')}</div>`:''}
       <div class="post-nav"><span class="pn"><a class="btn btn-line" href="#news/notice">← 목록</a><a class="btn btn-line" href="#news/calendar">일정</a>${p.photos.length?'<a class="btn btn-line" href="#news/gallery">갤러리</a>':''}</span>
