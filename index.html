@@ -609,6 +609,13 @@ body.lb-open{overflow:hidden}
 .post-head .type{font-size:13.5px;font-weight:600;color:var(--text-soft);margin-left:8px}
 .post-sum{font-size:16.5px;line-height:1.85}
 .post-sum p+p{margin-top:12px}
+.post-body.has-poster{display:grid;gap:28px;align-items:start}
+@media(min-width:900px){.post-body.has-poster{grid-template-columns:minmax(0,1fr) 320px}}
+.poster{margin:0}
+.poster button{border:0;padding:0;background:none;cursor:zoom-in;display:block;width:100%;box-shadow:var(--shadow-card)}
+.poster img{width:100%;height:auto}
+.poster figcaption{font-size:13px;color:var(--text-soft);margin-top:8px;text-align:center}
+@media(max-width:899px){.poster{max-width:420px}}
 .cal-ev.tg-cur{background:#E3EEF7;color:#17507A}
 .cal-ev.tg-etc{background:#ECEBE8;color:#55524C}
 
@@ -1220,6 +1227,8 @@ const LINKS = {
 //    label    본문 제목 (선택, 예: "강의 개요" · "프로그램 목적" — 비우면 "내용")
 //    summary  본문 — 계획서·보고서의 강의 개요/프로그램 목적을 그대로 붙여넣기 (빈 줄 = 문단 구분)
 //    url      외부 링크 (선택, 상세 페이지에 버튼으로 표시)   urlLabel  버튼 글자 (선택, 기본 "바로가기")
+//    poster   포스터 이미지 경로 (선택) — 상세 페이지 본문 옆에 표시, 클릭하면 크게 보기 (갤러리에는 안 나옴)
+//             gallery/<id>/poster.jpg 처럼 같은 폴더에 올려 주세요
 //    photos   사진 경로 목록 (선택) — 비교과 건에 사진을 넣으면 활동 갤러리에 자동 추가 (첫 사진이 대표)
 //             사진은 GitHub 저장소 gallery/<id>/ 폴더에 올리고 경로를 적어 주세요
 const POSTS = [
@@ -1231,6 +1240,7 @@ const POSTS = [
     apply: "사전등록 후 입장 (입장 시 명찰·리플렛·경품추첨권 제공) · 중앙대 GR 인재양성 플랫폼 예비등록생 참여 시 비교과 3크레딧 적립",
     url: "https://www.greenbuildingfestival.or.kr", urlLabel: "사전등록 하기",
     label: "주요 내용",
+    poster: "gallery/2026-12-04-gr-job-fair/poster.jpg",
     summary: "그린리모델링 분야 학생들의 취업역량 강화를 위한 특강 실시\n참여 프로그램 운영 (이력서 사진촬영, 퍼스널컬러 진단, 지문적성검사, AI모의면접)\n\n09:30 ~ 10:00 개회식\n10:00 ~ 17:00 기업 면접 및 부대행사\n13:00 ~ 13:30 취업특강 1 (생성형AI활용 취업전략)\n14:00 ~ 15:00 채용설명회 1, 2\n15:00 ~ 16:00 취업특강 2 (NCS취업전략 꿀팁)\n16:30 ~ 17:00 경품추첨 및 폐회",
     photos: []
   },
@@ -1368,29 +1378,34 @@ const POSTS = [
   function viewPost(id){
     const v = $('#post-view'), i = P.findIndex(x=>x.id===id), p = P[i];
     if(!p){ v.innerHTML = '<div class="embed"><div class="embed-empty">해당 소식을 찾을 수 없습니다.</div></div><div class="post-nav"><a class="btn btn-line" href="#news/notice">← 소식 목록</a></div>'; return null; }
-    curPhotos = p.photos; curTitle = p.title;
+    curPhotos = p.photos; curTitle = p.title; const poster = String(p.poster||'').trim();
     const url = safeUrl(p.url), newer = P[i-1], older = P[i+1];
     const rows = [['날짜',when(p)],['시간',p.time],['장소',p.place],['강사',p.speaker],['신청',p.apply]].filter(r=>r[1]);
     v.innerHTML = `
       <div class="post-head"><span class="tag${tagCls(p.tag)}">${esc(tagTxt(p,1))}</span>${p.type?`<span class="type">${esc(p.type)}</span>`:''}${badge(p)}<h2>${esc(p.title)}</h2></div>
       ${rows.length?`<dl class="post-info">${rows.map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl>`:''}
+      <div class="post-body${poster?' has-poster':''}"><div>
       ${p.summary?`<h3 class="h-sub" style="margin-bottom:10px">${esc(p.label||'내용')}</h3><div class="post-sum">${fmtBody(p.summary)}</div>`:''}
       ${url?`<div class="btn-row mt24"><a class="btn btn-fill" href="${esc(url)}" target="_blank" rel="noopener">${esc(p.urlLabel||'바로가기')} ↗</a></div>`:''}
+      </div>${poster?`<figure class="poster"><button type="button" aria-label="포스터 크게 보기"><img src="${esc(poster)}" alt="${esc(p.title)} 포스터"></button><figcaption>포스터를 누르면 크게 볼 수 있습니다</figcaption></figure>`:''}</div>
       ${p.photos.length?`<h3 class="h-sub mt40" style="margin-bottom:14px">활동 사진 <span class="soft small">${p.photos.length}장</span></h3>
         <div class="photos">${p.photos.map((ph,j)=>`<button type="button" data-i="${j}" aria-label="사진 ${j+1} 크게 보기"><img src="${esc(ph)}" alt="${esc(p.title)} 사진 ${j+1}" loading="lazy"></button>`).join('')}</div>`:''}
       <div class="post-nav"><span class="pn"><a class="btn btn-line" href="#news/notice">← 목록</a><a class="btn btn-line" href="#news/calendar">일정</a>${p.photos.length?'<a class="btn btn-line" href="#news/gallery">갤러리</a>':''}</span>
         <span class="pn">${newer?`<a class="btn btn-line" href="#post/${newer.id}">이전 소식</a>`:''}${older?`<a class="btn btn-line" href="#post/${older.id}">다음 소식</a>`:''}</span></div>`;
     return p;
   }
-  $('#post-view').addEventListener('click',e=>{ const b=e.target.closest('.photos button'); if(b) openLb(+b.dataset.i); });
+  $('#post-view').addEventListener('click',e=>{
+    const pb=e.target.closest('.poster button');
+    if(pb){ lbList=[pb.querySelector('img').getAttribute('src')]; lbLabel='포스터'; return openLb(0); }
+    const b=e.target.closest('.photos button'); if(b){ lbList=curPhotos; lbLabel='사진'; openLb(+b.dataset.i); } });
 
   // 사진 크게 보기
-  const lb = $('#lb'), lbImg = $('img',lb); let li = 0;
-  function showLb(){ lbImg.src = curPhotos[li]; lbImg.alt = `${curTitle} 사진 ${li+1}`; $('.lb-c',lb).textContent = `${li+1} / ${curPhotos.length}`;
-    $('.lb-p',lb).style.display = $('.lb-n',lb).style.display = curPhotos.length>1 ? '' : 'none'; }
+  const lb = $('#lb'), lbImg = $('img',lb); let li = 0, lbList = [], lbLabel = '사진';
+  function showLb(){ lbImg.src = lbList[li]; lbImg.alt = `${curTitle} ${lbLabel} ${li+1}`; $('.lb-c',lb).textContent = lbList.length>1 ? `${li+1} / ${lbList.length}` : '';
+    $('.lb-p',lb).style.display = $('.lb-n',lb).style.display = lbList.length>1 ? '' : 'none'; }
   function openLb(i){ li=i; showLb(); lb.classList.add('on'); document.body.classList.add('lb-open'); $('.lb-x',lb).focus(); }
   function closeLb(){ lb.classList.remove('on'); document.body.classList.remove('lb-open'); }
-  const step = d=>{ li=(li+d+curPhotos.length)%curPhotos.length; showLb(); };
+  const step = d=>{ if(lbList.length<2) return; li=(li+d+lbList.length)%lbList.length; showLb(); };
   $('.lb-x',lb).addEventListener('click',closeLb);
   $('.lb-p',lb).addEventListener('click',()=>step(-1));
   $('.lb-n',lb).addEventListener('click',()=>step(1));
