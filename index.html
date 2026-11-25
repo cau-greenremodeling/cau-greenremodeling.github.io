@@ -1211,6 +1211,7 @@ const LINKS = {
 //    label    본문 제목 (선택, 예: "강의 개요" · "프로그램 목적" — 비우면 "내용")
 //    summary  본문 — 계획서·보고서의 강의 개요/프로그램 목적을 그대로 붙여넣기 (빈 줄 = 문단 구분)
 //    url      외부 링크 (선택, 상세 페이지에 버튼으로 표시)   urlLabel  버튼 글자 (선택, 기본 "바로가기")
+//    url2     두 번째 외부 링크 (선택)                        url2Label 버튼 글자 (선택)
 //    poster   포스터 이미지 경로 (선택) — 상세 페이지 본문 옆에 표시, 클릭하면 크게 보기 (갤러리에는 안 나옴)
 //             gallery/<id>/poster.jpg 처럼 같은 폴더에 올려 주세요
 //    photos   사진 경로 목록 (선택) — 비교과 건에 사진을 넣으면 활동 갤러리에 자동 추가 (첫 사진이 대표)
@@ -1221,8 +1222,9 @@ const POSTS = [
     tag: "비교과", cat: "취·창업", type: "취업박람회",
     title: "2026 녹색건축한마당 그린리모델링 취업박람회",
     date: "2026-12-04", time: "10:00 ~ 17:00", place: "서울드래곤시티 한라홀3",
-    apply: "사전등록 후 입장 (입장 시 명찰·리플렛·경품추첨권 제공) · 중앙대 GR 인재양성 플랫폼 예비등록생 참여 시 비교과 3크레딧 적립",
-    url: "https://www.greenbuildingfestival.or.kr", urlLabel: "사전등록 하기",
+    apply: "① 녹색건축한마당 홈페이지에서 사전신청 (입장 시 명찰·리플렛·경품추첨권 제공)\n② 레인보우시스템 비교과 프로그램에서 \"그린리모델링\" 검색 후 해당 건 신청",
+    url: "https://www.greenbuildingfestival.or.kr", urlLabel: "녹색건축한마당 사전신청",
+    url2: "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureDetail?reservegroupid=1&menuid=001002002&submode=lecture&reserveprogramid=L&searchstatus=&searchlearnsystem=&searchcore=&searchcategorytype=&searchmileagepay=&searchtext=%EA%B7%B8%EB%A6%B0%EB%A6%AC%EB%AA%A8%EB%8D%B8%EB%A7%81&searchselect=&pagesize=10&viewtype=L&currentpage=1&lecturegroupid=8724", url2Label: "레인보우시스템 신청",
     label: "주요 내용",
     poster: "gallery/2026-12-04-gr-job-fair/poster.jpg",
     summary: "그린리모델링 분야 학생들의 취업역량 강화를 위한 특강 실시\n참여 프로그램 운영 (이력서 사진촬영, 퍼스널컬러 진단, 지문적성검사, AI모의면접)\n\n09:30 ~ 10:00 개회식\n10:00 ~ 17:00 기업 면접 및 부대행사\n13:00 ~ 13:30 취업특강 1 (생성형AI활용 취업전략)\n14:00 ~ 15:00 채용설명회 1, 2\n15:00 ~ 16:00 취업특강 2 (NCS취업전략 꿀팁)\n16:30 ~ 17:00 경품추첨 및 폐회",
@@ -1363,14 +1365,14 @@ const POSTS = [
     const v = $('#post-view'), i = P.findIndex(x=>x.id===id), p = P[i];
     if(!p){ v.innerHTML = '<div class="embed"><div class="embed-empty">해당 소식을 찾을 수 없습니다.</div></div><div class="post-nav"><a class="btn btn-line" href="#news/notice">← 소식 목록</a></div>'; return null; }
     curPhotos = p.photos; curTitle = p.title; const poster = String(p.poster||'').trim();
-    const url = safeUrl(p.url), newer = P[i-1], older = P[i+1];
+    const url = safeUrl(p.url), url2 = safeUrl(p.url2), newer = P[i-1], older = P[i+1];
     const rows = [['날짜',when(p)],['시간',p.time],['장소',p.place],['강사',p.speaker],['신청',p.apply]].filter(r=>r[1]);
     v.innerHTML = `
       <div class="post-head"><span class="tag${tagCls(p.tag)}">${esc(tagTxt(p,1))}</span>${p.type?`<span class="type">${esc(p.type)}</span>`:''}${badge(p)}<h2>${esc(p.title)}</h2></div>
-      ${rows.length?`<dl class="post-info">${rows.map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl>`:''}
+      ${rows.length?`<dl class="post-info">${rows.map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1]).replace(/\n/g,'<br>')}</dd>`).join('')}</dl>`:''}
       <div class="post-body${poster?' has-poster':''}"><div>
       ${p.summary?`<h3 class="h-sub" style="margin-bottom:10px">${esc(p.label||'내용')}</h3><div class="post-sum">${fmtBody(p.summary)}</div>`:''}
-      ${url?`<div class="btn-row mt24"><a class="btn btn-fill" href="${esc(url)}" target="_blank" rel="noopener">${esc(p.urlLabel||'바로가기')} ↗</a></div>`:''}
+      ${url||url2?`<div class="btn-row mt24">${url?`<a class="btn btn-fill" href="${esc(url)}" target="_blank" rel="noopener">${esc(p.urlLabel||'바로가기')} ↗</a>`:''}${url2?`<a class="btn btn-fill" href="${esc(url2)}" target="_blank" rel="noopener">${esc(p.url2Label||'바로가기')} ↗</a>`:''}</div>`:''}
       </div>${poster?`<figure class="poster"><button type="button" aria-label="포스터 크게 보기"><img src="${esc(poster)}" alt="${esc(p.title)} 포스터"></button><figcaption>포스터를 누르면 크게 볼 수 있습니다</figcaption></figure>`:''}</div>
       ${p.photos.length?`<h3 class="h-sub mt40" style="margin-bottom:14px">활동 사진 <span class="soft small">${p.photos.length}장</span></h3>
         <div class="photos">${p.photos.map((ph,j)=>`<button type="button" data-i="${j}" aria-label="사진 ${j+1} 크게 보기"><img src="${esc(ph)}" alt="${esc(p.title)} 사진 ${j+1}" loading="lazy"></button>`).join('')}</div>`:''}
