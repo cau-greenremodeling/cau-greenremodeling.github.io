@@ -639,6 +639,80 @@ body.lb-open{overflow:hidden}
 .fx-op.arrow::after{content:"→"}
 @media(max-width:899px){.fx-op{font-size:32px;padding:2px 0}.fx-op.arrow::after{content:"↓"}}
 
+/* ---------- 일정 (연간 캘린더 · 요약보기) ---------- */
+.tag.tg-acad,.cal-ev.tg-acad{background:#fff;color:#55524C;box-shadow:inset 0 0 0 1px #D9D6D0}
+.chip.nf-acad{border-color:#D9D6D0;color:#55524C}.chip.nf-acad.on{background:#55524C;border-color:#55524C;color:#fff}
+span.cal-ev{cursor:default}
+span.cal-ev:hover{background:var(--green-100);color:var(--green-900)}
+.sch-top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-bottom:18px}
+.yr-sel{display:flex;align-items:center;gap:16px;margin-right:auto}
+.yr-sel b{font-size:clamp(32px,4.4vw,44px);font-weight:300;letter-spacing:-0.02em;color:var(--green-900);font-variant-numeric:tabular-nums;line-height:1}
+.yr-sel .cal-btn{width:40px;height:40px;font-size:20px}
+.yr-sel .cal-btn:disabled{opacity:.3;cursor:default;border-color:var(--line);color:var(--text)}
+.sch-filter{margin:0 0 18px}
+.mbar{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));border-top:2px solid var(--green-900);border-bottom:1px solid var(--line);background:#fff;position:sticky;top:var(--nav-h);z-index:5;margin-bottom:8px}
+.mbar button{font:inherit;background:none;border:0;cursor:pointer;padding:9px 0 7px;display:grid;justify-items:center;gap:3px;color:var(--text);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+.mbar button span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;transition:background .15s}
+.mbar button:hover span{background:var(--cream)}
+.mbar button.on span{background:var(--green-900);color:#fff}
+.mbar button i{width:5px;height:5px;border-radius:50%;background:transparent}
+.mbar button.has i{background:var(--amber)}
+.mbar button:not(.has){color:var(--text-soft)}
+@media(max-width:560px){.mbar button{font-size:13px}.mbar button span{width:26px;height:26px}}
+
+/* 연간 캘린더 */
+.ym{display:grid;gap:18px 48px;padding:32px 0;border-bottom:1px solid var(--line);scroll-margin-top:calc(var(--nav-h) + 72px)}
+.ym:last-child{border-bottom:0}
+@media(min-width:860px){.ym{grid-template-columns:250px minmax(0,1fr)}}
+.ym-head{display:flex;align-items:flex-end;gap:12px;margin-bottom:14px}
+.ym-head b{font-size:56px;font-weight:300;line-height:.9;color:var(--green-900);letter-spacing:-0.04em;font-variant-numeric:tabular-nums}
+.ym-head span{flex:1;font-size:15px;font-weight:500;color:var(--text-soft);border-bottom:1px solid var(--line);padding-bottom:6px}
+.mini{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:13px;max-width:320px}
+.mini .w{font-size:11.5px;font-weight:700;color:var(--text-soft);padding:2px 0 6px}
+.mini .sun{color:var(--red)}.mini .sat{color:var(--blue)}
+.mini .d{aspect-ratio:1;display:grid;place-items:center;font-variant-numeric:tabular-nums;transition:background .15s,color .15s}
+.mini .d.ev{background:var(--green-100);color:var(--green-900);font-weight:700}
+.mini .d.today{box-shadow:inset 0 0 0 2px var(--green-900);font-weight:700}
+.mini .d.hl{background:var(--green-700);color:#fff}
+.yl{list-style:none}
+.yl li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 20px;padding:12px 0;border-bottom:1px solid #EEECE7;align-items:start}
+.yl li:first-child{padding-top:4px}
+.yl li:last-child{border-bottom:0}
+.yl .tt{font-weight:600;line-height:1.5}
+.yl .tt .tag{margin-right:8px;vertical-align:1px;font-size:12px;padding:2px 9px}
+.yl .tt a,.ys-r .tt a{color:var(--text);text-decoration:underline;text-decoration-color:#B9D8C6;text-decoration-thickness:2px;text-underline-offset:4px}
+.yl .tt a:hover,.ys-r .tt a:hover{color:var(--green-700);text-decoration-color:var(--green-700)}
+.yl .mm{grid-column:1;font-size:13.5px;color:var(--text-soft)}
+.dt{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--text-soft);white-space:nowrap;font-variant-numeric:tabular-nums}
+.dt svg{width:15px;height:15px;color:var(--green-700);flex:0 0 15px}
+.yl-none{font-size:14.5px;color:var(--text-soft);padding:4px 0}
+@media(max-width:560px){.yl li{grid-template-columns:1fr}.yl .dt{grid-row:2}.yl .mm{grid-row:3}}
+
+/* 요약보기 */
+.ys{background:#fff;box-shadow:var(--shadow-card);margin-top:16px}
+.ys-m{display:grid;grid-template-columns:104px minmax(0,1fr);border-bottom:1px solid var(--line);scroll-margin-top:calc(var(--nav-h) + 72px)}
+.ys-m:last-child{border-bottom:0}
+.ys-m>h4{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:12px 0;border-right:1px solid var(--line);background:#FAF9F6;color:var(--green-900);font-size:30px;font-weight:300;letter-spacing:-0.03em;font-variant-numeric:tabular-nums}
+.ys-m>h4 small{font-size:12px;font-weight:600;color:var(--text-soft);letter-spacing:0}
+.ys-r{display:grid;grid-template-columns:240px minmax(0,1fr);gap:4px 16px;padding:13px 20px;border-bottom:1px solid #EEECE7;align-items:start}
+.ys-r:last-child{border-bottom:0}
+.ys-r:hover{background:#FAF9F6}
+.ys-r .tt{font-weight:600;line-height:1.5}
+.ys-r .tt .tag{margin-right:8px;vertical-align:1px;font-size:12px;padding:2px 9px}
+.ys-r .tt small{display:block;font-weight:400;font-size:13.5px;color:var(--text-soft)}
+@media(max-width:640px){.ys-m{grid-template-columns:64px minmax(0,1fr)}.ys-m>h4{font-size:22px}.ys-m>h4 small{font-size:10.5px}.ys-r{grid-template-columns:1fr;padding:12px 14px}}
+.sch-month{margin-top:16px}
+
+/* 인쇄 (일정 탭 등) */
+@media print{
+  .nav,.drawer,footer,.logos,.toast,.lb,.sch-tools,.mbar,.sch-filter{display:none!important}
+  body{background:#fff}
+  .js [data-page]{animation:none!important}
+  .page-head{background:#fff;color:#000;padding:0 0 8px}
+  .page-head h1{color:#000}.page-head p{color:#555}.crumb,.subtabs{display:none}
+  .sec{padding:8px 0}.ym{break-inside:avoid;padding:16px 0}.ys{box-shadow:none;border:1px solid #ccc}.ys-m{break-inside:avoid}
+}
+
 </style>
 </head>
 <body>
@@ -662,6 +736,8 @@ body.lb-open{overflow:hidden}
         <ul class="drop"><li><a href="#curriculum/system">이수 체계</a></li><li><a href="#curriculum/course">교과 영역</a></li><li><a href="#curriculum/extra">비교과 영역</a></li><li><a href="#curriculum/benefit">혜택 (마이크로디그리·장학금)</a></li></ul></li>
       <li><a href="#join" data-nav="join">참여하기</a>
         <ul class="drop"><li><a href="#join/register">예비등록</a></li><li><a href="#join/guide">참여 후 이용 안내</a></li><li><a href="#join/apply">비교과 신청</a></li><li><a data-link="faq" href="#">FAQ ↗</a></li></ul></li>
+      <li><a href="#schedule" data-nav="schedule">일정</a>
+        <ul class="drop"><li><a href="#schedule/year">연간 캘린더</a></li><li><a href="#schedule/list">요약보기</a></li><li><a href="#schedule/month">월별 달력</a></li></ul></li>
       <li><a href="#news" data-nav="news">소식</a>
         <ul class="drop"><li><a href="#news/notice">공지</a></li><li><a href="#news/gallery">활동 갤러리</a></li></ul></li>
     </ul>
@@ -673,6 +749,7 @@ body.lb-open{overflow:hidden}
   <h4>사업 안내</h4><a href="#about/overview">추진 배경 및 목적</a><a href="#about/roadmap">연차별 로드맵</a><a href="#about/org">조직도</a>
   <h4>이수 안내</h4><a href="#curriculum/system">이수 체계</a><a href="#curriculum/course">교과 영역</a><a href="#curriculum/extra">비교과 영역</a><a href="#curriculum/benefit">혜택 (마이크로디그리·장학금)</a>
   <h4>참여하기</h4><a href="#join/register">예비등록</a><a href="#join/guide">참여 후 이용 안내</a><a href="#join/apply">비교과 신청</a><a data-link="faq" href="#">FAQ ↗</a>
+  <h4>일정</h4><a href="#schedule/year">연간 캘린더</a><a href="#schedule/list">요약보기</a><a href="#schedule/month">월별 달력</a>
   <h4>소식</h4><a href="#news/notice">공지</a><a href="#news/gallery">활동 갤러리</a>
   <a class="btn btn-fill" data-link="preRegister" href="#">예비등록 하기</a>
 </nav>
@@ -1108,7 +1185,45 @@ body.lb-open{overflow:hidden}
 </div>
 
 <!-- =========================================================
-     04 소식
+     04 일정
+     ========================================================= -->
+<div data-page="schedule">
+  <section class="page-head">
+    <div class="wrap">
+      <div class="crumb"><a href="#home">홈</a> / 일정</div>
+      <h1>일정</h1>
+      <p>사업단 비교과 프로그램과 주요 일정을 한 해 단위로 모아 봅니다.</p>
+    </div>
+  </section>
+
+  <section class="sec sec-white" id="schedule-view">
+    <div class="wrap">
+      <div class="sch-top">
+        <div class="yr-sel">
+          <button type="button" class="cal-btn" data-y="-1" aria-label="이전 연도">‹</button>
+          <b id="sch-year" aria-live="polite"></b>
+          <button type="button" class="cal-btn" data-y="1" aria-label="다음 연도">›</button>
+        </div>
+        <div class="chips sch-tools" id="sch-view" role="tablist" aria-label="보기 방식">
+          <button type="button" class="chip on" data-v="year">연간 캘린더</button>
+          <button type="button" class="chip" data-v="list">요약보기</button>
+          <button type="button" class="chip" data-v="month">월별 달력</button>
+        </div>
+        <button type="button" class="chip sch-tools" id="sch-print">인쇄</button>
+      </div>
+      <div class="chips news-filter sch-filter" id="sch-filter"><button class="chip on" data-v="">전체</button><span class="nf-sep"></span><button class="chip nf-bg" data-v="비교과">비교과 전체</button><button class="chip nf-bg sub" data-v="비교과:공모·경진대회">공모·경진대회</button><button class="chip nf-bg sub" data-v="비교과:실무역량">실무역량</button><button class="chip nf-bg sub" data-v="비교과:국제교류">국제교류</button><button class="chip nf-bg sub" data-v="비교과:현장실습">현장실습</button><button class="chip nf-bg sub" data-v="비교과:취·창업">취·창업</button><button class="chip nf-bg sub" data-v="비교과:학술·연구">학술·연구</button><span class="nf-sep"></span><button class="chip nf-cur" data-v="교과">교과</button><button class="chip nf-etc" data-v="기타">기타</button></div>
+      <nav class="mbar" id="sch-mbar" aria-label="월 바로가기"></nav>
+      <div id="sch-body"></div>
+      <ul class="note mt24">
+        <li>밑줄이 있는 제목을 누르면 공지 상세(시간·장소·신청 방법)를 볼 수 있습니다. 밑줄이 없는 일정은 아직 공지 전인 계획 일정입니다.</li>
+        <li>일정은 사정에 따라 바뀔 수 있으며, 확정된 일정은 공지로 안내합니다.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<!-- =========================================================
+     05 소식
      ========================================================= -->
 <div data-page="news">
   <section class="page-head">
@@ -1125,9 +1240,7 @@ body.lb-open{overflow:hidden}
       <div class="sec-head"><span class="eyebrow">Notice</span><h2 class="h-sec mt8">공지</h2></div>
       <div class="chips news-filter" id="news-filter"><button class="chip on" data-v="">전체</button><span class="nf-sep"></span><button class="chip nf-bg" data-v="비교과">비교과 전체</button><button class="chip nf-bg sub" data-v="비교과:공모·경진대회">공모·경진대회</button><button class="chip nf-bg sub" data-v="비교과:실무역량">실무역량</button><button class="chip nf-bg sub" data-v="비교과:국제교류">국제교류</button><button class="chip nf-bg sub" data-v="비교과:현장실습">현장실습</button><button class="chip nf-bg sub" data-v="비교과:취·창업">취·창업</button><button class="chip nf-bg sub" data-v="비교과:학술·연구">학술·연구</button><span class="nf-sep"></span><button class="chip nf-cur" data-v="교과">교과</button><button class="chip nf-etc" data-v="기타">기타</button></div>
       <ul class="news" id="news-all"></ul>
-      <h3 class="h-sub mt40" id="news-calendar">사업단 일정</h3>
-      <p class="soft small mt8" style="margin-bottom:16px">일정을 누르면 날짜·시간·장소와 내용을 볼 수 있습니다.</p>
-      <div class="cal" id="cal"></div>
+      <a class="card quick mt40" href="#schedule"><div><b>사업단 일정</b><span>한 해 비교과 일정을 연간 캘린더 · 요약보기로 확인하세요</span></div><span class="arrow" aria-hidden="true">→</span></a>
     </div>
   </section>
 
@@ -1263,6 +1376,22 @@ const POSTS = [
   },
 ];
 
+// 3) 연간 일정 — 공지 글을 올리기 전에 한 해 일정을 미리 적어 두는 곳입니다
+//    날짜가 있는 소식(POSTS)은 여기에 적지 않아도 [일정] 탭에 자동으로 나옵니다
+//
+//    title    일정 이름
+//    date     "YYYY-MM-DD"  또는 날짜 미정이면 "YYYY-MM" (예: "2027-05" → "5월 중"으로 표시)
+//    end      여러 날 일정의 마지막 날 (선택)
+//    tag      "비교과" | "교과" | "기타" | "학사"  (비우면 "비교과")
+//    cat      비교과 유형 (비교과만, 소식과 같은 6개)
+//    time · place · note   (선택) 시간 · 장소 · 짧은 메모
+//    post     (선택) 나중에 공지를 올렸다면 그 소식의 id — 적어 두면 이 줄 대신 공지 글이 표시됩니다
+const SCHEDULE = [
+  // { title: "GR 기술강습회 (1차)", date: "2027-05", cat: "실무역량", note: "세부 일정은 공지 예정" },
+  // { title: "GR 전문가 초청 강연", date: "2027-04-08", time: "13:00 ~ 15:00", cat: "실무역량" },
+  // { title: "2027학년도 1학기 개강", date: "2027-03-02", tag: "학사" },
+];
+
 /* =========================================================
    아래는 동작 코드입니다 (수정 불필요)
    ========================================================= */
@@ -1290,7 +1419,7 @@ const POSTS = [
     return esc(s).trim().split(/\n\s*\n/).map(p=>'<p>'+p.replace(/\n/g,'<br>')
       .replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>')+'</p>').join('');
   }
-  const tagCls = t=>({'교과':' tg-cur','기타':' tg-etc'}[t]||'');
+  const tagCls = t=>({'교과':' tg-cur','기타':' tg-etc','학사':' tg-acad'}[t]||'');
   const tagTxt = (p,full)=>p.tag==='비교과'&&p.cat ? (full?'비교과 · ':'')+p.cat : p.tag;
 
   // ---------- 소식 DB ----------
@@ -1321,35 +1450,135 @@ const POSTS = [
   }));
   renderNews();
 
-  // ---------- 캘린더 ----------
-  let cy = today.getFullYear(), cm = today.getMonth();
-  function renderCal(){
-    const box = $('#cal'); if(!box) return;
-    const first = new Date(cy,cm,1), last = new Date(cy,cm+1,0);
+  // ---------- 일정 (연간 캘린더 · 요약보기 · 월별 달력) ----------
+  const MON_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const pad = n=>String(n).padStart(2,'0');
+  const calIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>';
+  const postIds = new Set(P.map(p=>p.id));
+  function parseD(v){ const m=String(v||'').match(/(\d{4})\D+(\d{1,2})(?:\D+(\d{1,2}))?/); return m?{y:+m[1],m:+m[2]-1,d:m[3]?+m[3]:0}:null; }
+  const E = [
+    ...P.filter(p=>p.st).map(p=>({...p, href:'#post/'+p.id, tbd:false, note:''})),
+    ...(typeof SCHEDULE!=='undefined'?SCHEDULE:[]).map(x=>{
+      const a = parseD(x.date); if(!a) return null;
+      const pid = String(x.post||'').trim().replace(/[^\w-]/g,'-');
+      if(pid && postIds.has(pid)) return null;               // 공지가 올라오면 공지 글로 대체
+      const tbd = !a.d, st = new Date(a.y,a.m,tbd?1:a.d), b = !tbd && parseD(x.end);
+      const en = tbd ? new Date(a.y,a.m+1,0) : (b&&b.d ? new Date(b.y,b.m,b.d) : st);
+      return { title:x.title||'', tag:x.tag||'비교과', cat:x.cat||'', type:x.type||'', time:x.time||'', place:x.place||'', note:x.note||'',
+               st, en:en<st?st:en, sk:dayKey(st), ek:dayKey(en<st?st:en), tbd, href:'', photos:[] };
+    }).filter(Boolean)
+  ].sort((a,b)=>a.st-b.st);
+  E.forEach((e,i)=>e.i=i);
+  if(E.some(e=>e.tag==='학사')) $('#sch-filter').insertAdjacentHTML('beforeend','<button class="chip nf-acad" data-v="학사">학사</button>');
+
+  const thisY = today.getFullYear();
+  const years = E.map(e=>e.st.getFullYear()).concat(E.map(e=>e.en.getFullYear()));
+  const minY = Math.min(thisY, ...years), maxY = Math.max(thisY+1, ...years);
+  let sy = thisY, sv = 'year', cm = today.getMonth(), sf = '';
+
+  const mKeys = (y,m)=>[dayKey(new Date(y,m,1)), dayKey(new Date(y,m+1,0))];
+  const inMonth = (e,y,m)=>{ const [k1,k2]=mKeys(y,m); return e.ek>=k1 && e.sk<=k2; };
+  const sortIn = (a,b)=>(a.tbd-b.tbd)||(a.sk-b.sk)||(a.ek-b.ek);
+  const md = x=>`${x.getFullYear()!==sy?x.getFullYear()+'.':''}${pad(x.getMonth()+1)}.${pad(x.getDate())}(${DOW[x.getDay()]})`;
+  const evDate = e=>e.tbd ? `${e.st.getMonth()+1}월 중 <span class="small">(날짜 미정)</span>` : md(e.st)+(e.ek!==e.sk?' ~ '+md(e.en):'');
+  const evBadge = e=>e.tbd ? (e.sk>tk?'<span class="st">예정</span>':e.ek<tk?'<span class="st done">완료</span>':'') : badge(e);
+  const evTitle = e=>`<span class="tag${tagCls(e.tag)}">${esc(tagTxt(e))}</span>${e.href?`<a href="${e.href}">${esc(e.title)}</a>`:esc(e.title)}${evBadge(e)}`;
+  const evMeta = e=>[e.type,e.time,e.place,e.note].filter(Boolean).map(esc).join(' · ');
+  const rowY = e=>{ const m=evMeta(e); return `<li data-e="${e.i}"><div class="tt">${evTitle(e)}</div><span class="dt">${calIco}${evDate(e)}</span>${m?`<span class="mm">${m}</span>`:''}</li>`; };
+
+  function viewYear(list){
+    let h = '';
+    for(let m=0;m<12;m++){
+      const first = new Date(sy,m,1), last = new Date(sy,m+1,0), k1 = dayKey(first);
+      const evs = list.filter(e=>inMonth(e,sy,m)).sort(sortIn);
+      let mini = DOW.map((x,i)=>`<span class="w${i===0?' sun':i===6?' sat':''}">${x}</span>`).join('') + '<span></span>'.repeat(first.getDay());
+      for(let d=1; d<=last.getDate(); d++){
+        const k = k1+d-1, dw = (first.getDay()+d-1)%7, on = evs.filter(e=>!e.tbd && k>=e.sk && k<=e.ek);
+        mini += `<span class="d${dw===0?' sun':dw===6?' sat':''}${on.length?' ev':''}${k===tk?' today':''}" data-k="${k}"${on.length?` title="${esc(on.map(e=>e.title).join('\n'))}"`:''}>${d}</span>`;
+      }
+      h += `<section class="ym" id="sch-m${m+1}"><div><div class="ym-head"><b>${pad(m+1)}</b><span>${MON_EN[m]}</span></div><div class="mini" aria-hidden="true">${mini}</div></div>
+        ${evs.length?`<ul class="yl">${evs.map(rowY).join('')}</ul>`:'<p class="yl-none">등록된 일정이 없습니다.</p>'}</section>`;
+    }
+    return h;
+  }
+  function viewList(list){
+    let h = '';
+    for(let m=0;m<12;m++){
+      const evs = list.filter(e=>inMonth(e,sy,m)).sort(sortIn); if(!evs.length) continue;
+      h += `<div class="ys-m" id="sch-m${m+1}"><h4>${pad(m+1)}<small>${MON_EN[m]}</small></h4><div>${evs.map(e=>{ const mt=evMeta(e);
+        return `<div class="ys-r"><span class="dt">${calIco}${evDate(e)}</span><div class="tt">${evTitle(e)}${mt?`<small>${mt}</small>`:''}</div></div>`; }).join('')}</div></div>`;
+    }
+    return h ? `<div class="ys">${h}</div>` : `<div class="embed mt16"><div class="embed-empty">${sy}년에 등록된 일정이 없습니다.</div></div>`;
+  }
+  function viewMonth(list){
+    const first = new Date(sy,cm,1), last = new Date(sy,cm+1,0);
     const cells = Math.ceil((first.getDay()+last.getDate())/7)*7;
     let g = DOW.map((x,i)=>`<div class="cal-dow${i===0?' sun':i===6?' sat':''}">${x}</div>`).join('');
     for(let i=0;i<cells;i++){
-      const d = new Date(cy, cm, 1-first.getDay()+i), k = dayKey(d);
-      const evs = P.filter(p=>p.st && k>=p.sk && k<=p.ek);
+      const d = new Date(sy, cm, 1-first.getDay()+i), k = dayKey(d);
+      const evs = list.filter(e=>!e.tbd && k>=e.sk && k<=e.ek);
       g += `<div class="cal-day${d.getMonth()!==cm?' out':''}${k===tk?' today':''}"><span class="n">${d.getDate()}</span>${
-        evs.map(p=>`<a class="cal-ev${tagCls(p.tag)}${p.photos.length?' has-ph':''}" href="#post/${p.id}" title="${esc(p.title)}">${esc(p.title)}</a>`).join('')}</div>`;
+        evs.map(e=>{ const c=`cal-ev${tagCls(e.tag)}${e.photos.length?' has-ph':''}`, t=esc(e.title);
+          return e.href?`<a class="${c}" href="${e.href}" title="${t}">${t}</a>`:`<span class="${c}" title="${t}">${t}</span>`; }).join('')}</div>`;
     }
-    const mev = P.filter(p=>p.st && p.ek>=dayKey(first) && p.sk<=dayKey(last)).sort((a,b)=>a.st-b.st);
-    box.innerHTML = `<div class="cal-bar"><h4>${cy}년 ${cm+1}월</h4>
+    const mev = list.filter(e=>inMonth(e,sy,cm)).sort(sortIn);
+    return `<div class="cal sch-month"><div class="cal-bar"><h4>${sy}년 ${cm+1}월</h4>
         <button type="button" class="cal-btn today-btn" data-m="0">오늘</button>
         <button type="button" class="cal-btn" data-m="-1" aria-label="이전 달">‹</button>
         <button type="button" class="cal-btn" data-m="1" aria-label="다음 달">›</button></div>
       <div class="cal-grid">${g}</div>
-      <div class="cal-list"><p class="lbl">${cm+1}월 일정</p>${mev.length?`<ul class="news">${mev.map(item).join('')}</ul>`:'<p class="soft small">이 달에 등록된 일정이 없습니다.</p>'}</div>`;
+      <div class="cal-list"><p class="lbl">${cm+1}월 일정</p>${mev.length?`<ul class="yl">${mev.map(rowY).join('')}</ul>`:'<p class="soft small">이 달에 등록된 일정이 없습니다.</p>'}</div></div>`;
   }
-  $('#cal') && $('#cal').addEventListener('click',e=>{
+  function renderSch(){
+    const [ft,fc] = sf.split(':');
+    const list = sf ? E.filter(e=>e.tag===ft && (!fc || e.cat===fc)) : E;
+    $('#sch-year').textContent = sy;
+    $$('.yr-sel [data-y]').forEach(b=>b.disabled = +b.dataset.y<0 ? sy<=minY : sy>=maxY);
+    $$('#sch-view .chip').forEach(b=>{ b.classList.toggle('on', b.dataset.v===sv); b.setAttribute('aria-selected', b.dataset.v===sv); });
+    $('#sch-mbar').innerHTML = MON_EN.map((x,m)=>{
+      const on = sv==='month' ? m===cm : (sy===thisY && m===today.getMonth());
+      const has = list.some(e=>inMonth(e,sy,m));
+      return `<button type="button" data-mon="${m}" class="${on?'on':''}${has?' has':''}" aria-label="${m+1}월${has?' (일정 있음)':''}"><span>${m+1}</span><i></i></button>`;
+    }).join('');
+    $('#sch-body').innerHTML = sv==='list' ? viewList(list) : sv==='month' ? viewMonth(list) : viewYear(list);
+  }
+  const schHash = ()=>history.replaceState(null,'',`#schedule/${sv}${sy!==thisY?'/'+sy:''}`);
+  function openSchedule(v, y){
+    if(['year','list','month'].includes(v)) sv = v;
+    if(+y>=minY && +y<=maxY && +y!==sy){ sy = +y; cm = sy===thisY ? today.getMonth() : 0; }
+    renderSch();
+  }
+  $('.yr-sel').addEventListener('click',e=>{
+    const b = e.target.closest('[data-y]'); if(!b || b.disabled) return;
+    sy += +b.dataset.y; cm = sy===thisY ? today.getMonth() : 0; renderSch(); schHash();
+  });
+  $$('#sch-view .chip').forEach(b=>b.addEventListener('click',()=>{ sv = b.dataset.v; renderSch(); schHash(); }));
+  $$('#sch-filter .chip').forEach(b=>b.addEventListener('click',()=>{
+    sf = b.dataset.v; $$('#sch-filter .chip').forEach(x=>x.classList.toggle('on',x===b)); renderSch();
+  }));
+  $('#sch-print').addEventListener('click',()=>window.print());
+  $('#sch-mbar').addEventListener('click',e=>{
+    const b = e.target.closest('[data-mon]'); if(!b) return;
+    const m = +b.dataset.mon;
+    if(sv==='month'){ cm = m; renderSch(); return; }
+    const el = document.getElementById('sch-m'+(m+1));
+    el ? el.scrollIntoView({behavior:'smooth'}) : showToast(`${m+1}월에는 등록된 일정이 없습니다`);
+  });
+  $('#sch-body').addEventListener('click',e=>{
     const b = e.target.closest('[data-m]'); if(!b) return;
     const m = +b.dataset.m;
-    if(m===0){ cy=today.getFullYear(); cm=today.getMonth(); }
-    else { const d=new Date(cy,cm+m,1); cy=d.getFullYear(); cm=d.getMonth(); }
-    renderCal();
+    if(m===0){ sy = thisY; cm = today.getMonth(); }
+    else { const d = new Date(sy,cm+m,1); if(d.getFullYear()<minY || d.getFullYear()>maxY) return; sy = d.getFullYear(); cm = d.getMonth(); }
+    renderSch(); schHash();
   });
-  renderCal();
+  // 연간 캘린더: 일정에 마우스를 올리면 해당 날짜를 달력에서 강조
+  const hlDays = (li,on)=>{
+    const e = E[+li.dataset.e], box = li.closest('.ym'); if(!e || e.tbd || !box) return;
+    $$('.mini .d',box).forEach(d=>{ const k=+d.dataset.k; if(k>=e.sk && k<=e.ek) d.classList.toggle('hl',on); });
+  };
+  $('#sch-body').addEventListener('mouseover',e=>{ const li=e.target.closest('.yl li[data-e]'); if(li && !li.contains(e.relatedTarget)) hlDays(li,true); });
+  $('#sch-body').addEventListener('mouseout',e=>{ const li=e.target.closest('.yl li[data-e]'); if(li && !li.contains(e.relatedTarget)) hlDays(li,false); });
+  renderSch();
 
   // ---------- 활동 갤러리 (비교과 · 사진 있는 건) ----------
   (function(){
@@ -1376,7 +1605,7 @@ const POSTS = [
       </div>${poster?`<figure class="poster"><button type="button" aria-label="포스터 크게 보기"><img src="${esc(poster)}" alt="${esc(p.title)} 포스터"></button><figcaption>포스터를 누르면 크게 볼 수 있습니다</figcaption></figure>`:''}</div>
       ${p.photos.length?`<h3 class="h-sub mt40" style="margin-bottom:14px">활동 사진 <span class="soft small">${p.photos.length}장</span></h3>
         <div class="photos">${p.photos.map((ph,j)=>`<button type="button" data-i="${j}" aria-label="사진 ${j+1} 크게 보기"><img src="${esc(ph)}" alt="${esc(p.title)} 사진 ${j+1}" loading="lazy"></button>`).join('')}</div>`:''}
-      <div class="post-nav"><span class="pn"><a class="btn btn-line" href="#news/notice">← 목록</a><a class="btn btn-line" href="#news/calendar">일정</a>${p.photos.length?'<a class="btn btn-line" href="#news/gallery">갤러리</a>':''}</span>
+      <div class="post-nav"><span class="pn"><a class="btn btn-line" href="#news/notice">← 목록</a><a class="btn btn-line" href="#schedule/year/${p.st?p.st.getFullYear():thisY}">일정</a>${p.photos.length?'<a class="btn btn-line" href="#news/gallery">갤러리</a>':''}</span>
         <span class="pn">${newer?`<a class="btn btn-line" href="#post/${newer.id}">이전 소식</a>`:''}${older?`<a class="btn btn-line" href="#post/${older.id}">다음 소식</a>`:''}</span></div>`;
     return p;
   }
@@ -1504,18 +1733,21 @@ const POSTS = [
   const pages = $$('[data-page]').map(p=>p.dataset.page);
   function route(){
     const h = decodeURIComponent(location.hash.slice(1)) || 'home';
-    let [p, sub] = h.split('/');
+    let [p, sub, extra] = h.split('/');
+    if(p==='news' && sub==='calendar'){ location.replace('#schedule'); return; }   // 예전 링크 호환
     if(!pages.includes(p)) p='home';
     const DETAIL = {post:viewPost};
     $$('[data-page]').forEach(el=>el.classList.toggle('on', el.dataset.page===p));
     $$('[data-nav]').forEach(a=>a.classList.toggle('active', a.dataset.nav===(DETAIL[p]?'news':p)));
     document.body.classList.remove('drawer-open'); $('#burger').setAttribute('aria-expanded','false');
     closeLb();
-    const titles={home:'',about:'사업 안내',curriculum:'이수 안내',join:'참여하기',news:'소식',post:'소식'};
+    const titles={home:'',about:'사업 안내',curriculum:'이수 안내',join:'참여하기',schedule:'일정',news:'소식',post:'소식'};
     let title = titles[p];
     if(DETAIL[p]){
       const r = DETAIL[p](sub); if(r) title = r.title;
       window.scrollTo({top:0});
+    } else if(p==='schedule'){
+      openSchedule(sub, extra); window.scrollTo({top:0});
     } else {
       const target = sub && document.getElementById(p+'-'+sub);
       requestAnimationFrame(()=>{ target ? target.scrollIntoView({behavior:'smooth'}) : window.scrollTo({top:0}); });
