@@ -693,6 +693,15 @@ body.lb-open{overflow:hidden}
 .yl li.ho .tt,.ys-r.ho .tt{color:#B3261E}
 .yl li.ac .dt,.ys-r.ac .dt{color:#9A968E}
 .yl li.ac .dt svg,.ys-r.ac .dt svg{color:#B5B1A8}
+/* 월별 달력 */
+.sch-month{margin-top:16px}
+.cal-day.sun .n,.cal-day .n.hol{color:var(--red)}
+.cal-day.sat .n{color:var(--blue)}
+.cal-day.today .n{color:#fff}
+.cal-hol{font-size:11.5px;font-weight:600;color:#B3261E;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cal-ev.tg-acad{font-weight:500}
+.cal-list .yl li:first-child{padding-top:0}
+@media(max-width:640px){.cal-hol{display:none}.cal-ev.tg-acad{background:#D9D6D0;box-shadow:none}}
 .yl-none{font-size:14.5px;color:var(--text-soft);padding:4px 0}
 @media(max-width:560px){.yl li{grid-template-columns:1fr}.yl .dt{grid-row:2}.yl .mm{grid-row:3}}
 
@@ -734,7 +743,7 @@ body.lb-open{overflow:hidden}
       <li><a href="#join" data-nav="join">참여하기</a>
         <ul class="drop"><li><a href="#join/register">예비등록</a></li><li><a href="#join/guide">참여 후 이용 안내</a></li><li><a href="#join/apply">비교과 신청</a></li><li><a data-link="faq" href="#">FAQ ↗</a></li></ul></li>
       <li><a href="#schedule" data-nav="schedule">일정</a>
-        <ul class="drop"><li><a href="#schedule/year">연간 캘린더</a></li><li><a href="#schedule/list">요약보기</a></li></ul></li>
+        <ul class="drop"><li><a href="#schedule/year">연간 캘린더</a></li><li><a href="#schedule/list">요약보기</a></li><li><a href="#schedule/month">월별 달력</a></li></ul></li>
       <li><a href="#news" data-nav="news">소식</a>
         <ul class="drop"><li><a href="#news/notice">공지</a></li><li><a href="#news/gallery">활동 갤러리</a></li></ul></li>
     </ul>
@@ -746,7 +755,7 @@ body.lb-open{overflow:hidden}
   <h4>사업 안내</h4><a href="#about/overview">추진 배경 및 목적</a><a href="#about/roadmap">연차별 로드맵</a><a href="#about/org">조직도</a>
   <h4>이수 안내</h4><a href="#curriculum/system">이수 체계</a><a href="#curriculum/course">교과 영역</a><a href="#curriculum/extra">비교과 영역</a><a href="#curriculum/benefit">혜택 (마이크로디그리·장학금)</a>
   <h4>참여하기</h4><a href="#join/register">예비등록</a><a href="#join/guide">참여 후 이용 안내</a><a href="#join/apply">비교과 신청</a><a data-link="faq" href="#">FAQ ↗</a>
-  <h4>일정</h4><a href="#schedule/year">연간 캘린더</a><a href="#schedule/list">요약보기</a>
+  <h4>일정</h4><a href="#schedule/year">연간 캘린더</a><a href="#schedule/list">요약보기</a><a href="#schedule/month">월별 달력</a>
   <h4>소식</h4><a href="#news/notice">공지</a><a href="#news/gallery">활동 갤러리</a>
   <a class="btn btn-fill" data-link="preRegister" href="#">예비등록 하기</a>
 </nav>
@@ -1204,6 +1213,7 @@ body.lb-open{overflow:hidden}
         <div class="chips sch-tools" id="sch-view" role="tablist" aria-label="보기 방식">
           <button type="button" class="chip on" data-v="year">연간 캘린더</button>
           <button type="button" class="chip" data-v="list">요약보기</button>
+          <button type="button" class="chip" data-v="month">월별 달력</button>
         </div>
       </div>
       <div class="chips news-filter sch-filter" id="sch-filter"><button class="chip on" data-v="">전체</button><span class="nf-sep"></span><button class="chip nf-bg" data-v="비교과">비교과</button><button class="chip nf-cur" data-v="교과">교과</button><button class="chip nf-etc" data-v="기타">기타</button><span class="nf-sep"></span><button type="button" class="chip sw on" id="sch-acad" aria-pressed="true">중앙대 학사일정</button></div>
@@ -1638,7 +1648,7 @@ const ACADEMIC = `
   }));
   renderNews();
 
-  // ---------- 일정 (연간 캘린더 · 요약보기) ----------
+  // ---------- 일정 (연간 캘린더 · 요약보기 · 월별 달력) ----------
   const MON_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const pad = n=>String(n).padStart(2,'0');
   const calIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>';
@@ -1668,7 +1678,7 @@ const ACADEMIC = `
 
   const thisY = today.getFullYear();
   const minY = Math.min(thisY, ...E.map(e=>e.en.getFullYear())), maxY = Math.max(thisY+1, ...E.map(e=>e.st.getFullYear()));
-  let sy = thisY, sv = 'year', sf = '', showAcad = true;
+  let sy = thisY, sv = 'year', cm = today.getMonth(), sf = '', showAcad = true;
 
   const mKeys = (y,m)=>[dayKey(new Date(y,m,1)), dayKey(new Date(y,m+1,0))];
   const inMonth = (e,y,m)=>{ const [k1,k2]=mKeys(y,m); return e.ek>=k1 && e.sk<=k2; };
@@ -1706,6 +1716,32 @@ const ACADEMIC = `
     }
     return h ? `<div class="ys">${h}</div>` : `<div class="embed mt16"><div class="embed-empty">${sy}년에 등록된 일정이 없습니다.</div></div>`;
   }
+  function viewMonth(list){
+    const first = new Date(sy,cm,1), last = new Date(sy,cm+1,0);
+    const cells = Math.ceil((first.getDay()+last.getDate())/7)*7;
+    let g = DOW.map((x,i)=>`<div class="cal-dow${i===0?' sun':i===6?' sat':''}">${x}</div>`).join('');
+    for(let i=0;i<cells;i++){
+      const d = new Date(sy, cm, 1-first.getDay()+i), k = dayKey(d), dw = d.getDay();
+      const here = list.filter(e=>!e.tbd && k>=e.sk && k<=e.ek);
+      const hol = here.filter(e=>e.hol);
+      // 칸 안에는 사업단 일정 + 7일 이하 학사일정만 (방학·휴학신청처럼 긴 학사일정은 아래 목록에만)
+      const chips = here.filter(e=>!e.hol && (!e.acad || (e.en-e.st)/864e5 < 7))
+                        .sort((a,b)=>(a.acad-b.acad)||(a.sk-b.sk));
+      g += `<div class="cal-day${d.getMonth()!==cm?' out':''}${k===tk?' today':''}${dw===0?' sun':dw===6?' sat':''}"><span class="n${hol.length?' hol':''}">${d.getDate()}</span>${
+        hol.map(e=>`<span class="cal-hol" title="${esc(e.title)}">${esc(e.title.replace(/\(공휴일\)/,''))}</span>`).join('')}${
+        chips.map(e=>{ const c=`cal-ev${tagCls(e.tag)}${e.photos.length?' has-ph':''}`, t=esc(e.title);
+          // 학사일정은 칸이 좁아 "2027학년도 1학기" 같은 머리말을 빼고 표시 (전체 제목은 마우스를 올리면 보임)
+          const s = e.acad ? esc(e.title.replace(/^\d{4}\s*(학년도|년)?\s*(\d학기\s*)?/,'') || e.title) : t;
+          return e.href?`<a class="${c}" href="${e.href}" title="${t}">${s}</a>`:`<span class="${c}" title="${t}">${s}</span>`; }).join('')}</div>`;
+    }
+    const k1 = mKeys(sy,cm)[0], mev = list.filter(e=>inMonth(e,sy,cm)).sort(sortBy(k1));
+    return `<div class="cal sch-month"><div class="cal-bar"><h4>${sy}년 ${cm+1}월</h4>
+        <button type="button" class="cal-btn today-btn" data-m="0">오늘</button>
+        <button type="button" class="cal-btn" data-m="-1" aria-label="이전 달">‹</button>
+        <button type="button" class="cal-btn" data-m="1" aria-label="다음 달">›</button></div>
+      <div class="cal-grid">${g}</div>
+      <div class="cal-list"><p class="lbl">${cm+1}월 일정</p>${mev.length?`<ul class="yl">${mev.map(rowY).join('')}</ul>`:'<p class="soft small">이 달에 등록된 일정이 없습니다.</p>'}</div></div>`;
+  }
   function renderSch(){
     const [ft,fc] = sf.split(':');
     const list = E.filter(e=>e.acad ? showAcad : (!sf || (e.tag===ft && (!fc || e.cat===fc))));
@@ -1713,21 +1749,21 @@ const ACADEMIC = `
     $$('.yr-sel [data-y]').forEach(b=>b.disabled = +b.dataset.y<0 ? sy<=minY : sy>=maxY);
     $$('#sch-view .chip').forEach(b=>{ b.classList.toggle('on', b.dataset.v===sv); b.setAttribute('aria-selected', b.dataset.v===sv); });
     $('#sch-mbar').innerHTML = MON_EN.map((x,m)=>{
-      const on = sy===thisY && m===today.getMonth();
+      const on = sv==='month' ? m===cm : (sy===thisY && m===today.getMonth());
       const has = list.some(e=>!e.acad && inMonth(e,sy,m));
       return `<button type="button" data-mon="${m}" class="${on?'on':''}${has?' has':''}" aria-label="${m+1}월${has?' (사업단 일정 있음)':''}"><span>${m+1}</span><i></i></button>`;
     }).join('');
-    $('#sch-body').innerHTML = sv==='list' ? viewList(list) : viewYear(list);
+    $('#sch-body').innerHTML = sv==='list' ? viewList(list) : sv==='month' ? viewMonth(list) : viewYear(list);
   }
   const schHash = ()=>history.replaceState(null,'',`#schedule/${sv}${sy!==thisY?'/'+sy:''}`);
   function openSchedule(v, y){
-    sv = v==='list' ? 'list' : 'year';
-    if(+y>=minY && +y<=maxY) sy = +y;
+    sv = ['list','month'].includes(v) ? v : 'year';
+    if(+y>=minY && +y<=maxY && +y!==sy){ sy = +y; cm = sy===thisY ? today.getMonth() : 0; }
     renderSch();
   }
   $('.yr-sel').addEventListener('click',e=>{
     const b = e.target.closest('[data-y]'); if(!b || b.disabled) return;
-    sy += +b.dataset.y; renderSch(); schHash();
+    sy += +b.dataset.y; cm = sy===thisY ? today.getMonth() : 0; renderSch(); schHash();
   });
   $$('#sch-view .chip').forEach(b=>b.addEventListener('click',()=>{ sv = b.dataset.v; renderSch(); schHash(); }));
   $$('#sch-filter .chip[data-v]').forEach(b=>b.addEventListener('click',()=>{
@@ -1739,8 +1775,17 @@ const ACADEMIC = `
   $('#sch-mbar').addEventListener('click',e=>{
     const b = e.target.closest('[data-mon]'); if(!b) return;
     const m = +b.dataset.mon;
+    if(sv==='month'){ cm = m; renderSch(); return; }
     const el = document.getElementById('sch-m'+(m+1));
     el ? el.scrollIntoView({behavior:'smooth'}) : showToast(`${m+1}월에는 등록된 일정이 없습니다`);
+  });
+  // 월별 달력: 이전·다음 달, 오늘
+  $('#sch-body').addEventListener('click',e=>{
+    const b = e.target.closest('[data-m]'); if(!b) return;
+    const m = +b.dataset.m;
+    if(m===0){ sy = thisY; cm = today.getMonth(); }
+    else { const d = new Date(sy,cm+m,1); if(d.getFullYear()<minY || d.getFullYear()>maxY) return; sy = d.getFullYear(); cm = d.getMonth(); }
+    renderSch(); schHash();
   });
   // 연간 캘린더: 일정에 마우스를 올리면 해당 날짜를 달력에서 강조
   const hlDays = (li,on)=>{
