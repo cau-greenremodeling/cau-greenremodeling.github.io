@@ -641,9 +641,11 @@ body.lb-open{overflow:hidden}
 
 /* ---------- 일정 (연간 캘린더 · 요약보기) ---------- */
 .tag.tg-acad,.cal-ev.tg-acad{background:#fff;color:#55524C;box-shadow:inset 0 0 0 1px #D9D6D0}
-.chip.nf-acad{border-color:#D9D6D0;color:#55524C}.chip.nf-acad.on{background:#55524C;border-color:#55524C;color:#fff}
-span.cal-ev{cursor:default}
-span.cal-ev:hover{background:var(--green-100);color:var(--green-900)}
+.tag.tg-hol{background:#fff;color:#B3261E;box-shadow:inset 0 0 0 1px #F3C2C2}
+.chip.sw{display:inline-flex;align-items:center;gap:7px;border-color:#D9D6D0;color:#55524C}
+.chip.sw::before{content:"";width:14px;height:14px;border:1.5px solid currentColor;border-radius:3px;box-sizing:border-box}
+.chip.sw.on{background:#55524C;border-color:#55524C;color:#fff}
+.chip.sw.on::before{background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2355524C' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/10px no-repeat;border-color:#fff}
 .sch-top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-bottom:18px}
 .yr-sel{display:flex;align-items:center;gap:16px;margin-right:auto}
 .yr-sel b{font-size:clamp(32px,4.4vw,44px);font-weight:300;letter-spacing:-0.02em;color:var(--green-900);font-variant-numeric:tabular-nums;line-height:1}
@@ -672,6 +674,7 @@ span.cal-ev:hover{background:var(--green-100);color:var(--green-900)}
 .mini .sun{color:var(--red)}.mini .sat{color:var(--blue)}
 .mini .d{aspect-ratio:1;display:grid;place-items:center;font-variant-numeric:tabular-nums;transition:background .15s,color .15s}
 .mini .d.ev{background:var(--green-100);color:var(--green-900);font-weight:700}
+.mini .d.hol{color:var(--red);font-weight:700}
 .mini .d.today{box-shadow:inset 0 0 0 2px var(--green-900);font-weight:700}
 .mini .d.hl{background:var(--green-700);color:#fff}
 .yl{list-style:none}
@@ -685,6 +688,11 @@ span.cal-ev:hover{background:var(--green-100);color:var(--green-900)}
 .yl .mm{grid-column:1;font-size:13.5px;color:var(--text-soft)}
 .dt{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--text-soft);white-space:nowrap;font-variant-numeric:tabular-nums}
 .dt svg{width:15px;height:15px;color:var(--green-700);flex:0 0 15px}
+/* 학사일정 행은 한 톤 낮춤 */
+.yl li.ac .tt,.ys-r.ac .tt{font-weight:500;color:var(--text-soft)}
+.yl li.ho .tt,.ys-r.ho .tt{color:#B3261E}
+.yl li.ac .dt,.ys-r.ac .dt{color:#9A968E}
+.yl li.ac .dt svg,.ys-r.ac .dt svg{color:#B5B1A8}
 .yl-none{font-size:14.5px;color:var(--text-soft);padding:4px 0}
 @media(max-width:560px){.yl li{grid-template-columns:1fr}.yl .dt{grid-row:2}.yl .mm{grid-row:3}}
 
@@ -701,17 +709,6 @@ span.cal-ev:hover{background:var(--green-100);color:var(--green-900)}
 .ys-r .tt .tag{margin-right:8px;vertical-align:1px;font-size:12px;padding:2px 9px}
 .ys-r .tt small{display:block;font-weight:400;font-size:13.5px;color:var(--text-soft)}
 @media(max-width:640px){.ys-m{grid-template-columns:64px minmax(0,1fr)}.ys-m>h4{font-size:22px}.ys-m>h4 small{font-size:10.5px}.ys-r{grid-template-columns:1fr;padding:12px 14px}}
-.sch-month{margin-top:16px}
-
-/* 인쇄 (일정 탭 등) */
-@media print{
-  .nav,.drawer,footer,.logos,.toast,.lb,.sch-tools,.mbar,.sch-filter{display:none!important}
-  body{background:#fff}
-  .js [data-page]{animation:none!important}
-  .page-head{background:#fff;color:#000;padding:0 0 8px}
-  .page-head h1{color:#000}.page-head p{color:#555}.crumb,.subtabs{display:none}
-  .sec{padding:8px 0}.ym{break-inside:avoid;padding:16px 0}.ys{box-shadow:none;border:1px solid #ccc}.ys-m{break-inside:avoid}
-}
 
 </style>
 </head>
@@ -737,7 +734,7 @@ span.cal-ev:hover{background:var(--green-100);color:var(--green-900)}
       <li><a href="#join" data-nav="join">참여하기</a>
         <ul class="drop"><li><a href="#join/register">예비등록</a></li><li><a href="#join/guide">참여 후 이용 안내</a></li><li><a href="#join/apply">비교과 신청</a></li><li><a data-link="faq" href="#">FAQ ↗</a></li></ul></li>
       <li><a href="#schedule" data-nav="schedule">일정</a>
-        <ul class="drop"><li><a href="#schedule/year">연간 캘린더</a></li><li><a href="#schedule/list">요약보기</a></li><li><a href="#schedule/month">월별 달력</a></li></ul></li>
+        <ul class="drop"><li><a href="#schedule/year">연간 캘린더</a></li><li><a href="#schedule/list">요약보기</a></li></ul></li>
       <li><a href="#news" data-nav="news">소식</a>
         <ul class="drop"><li><a href="#news/notice">공지</a></li><li><a href="#news/gallery">활동 갤러리</a></li></ul></li>
     </ul>
@@ -749,7 +746,7 @@ span.cal-ev:hover{background:var(--green-100);color:var(--green-900)}
   <h4>사업 안내</h4><a href="#about/overview">추진 배경 및 목적</a><a href="#about/roadmap">연차별 로드맵</a><a href="#about/org">조직도</a>
   <h4>이수 안내</h4><a href="#curriculum/system">이수 체계</a><a href="#curriculum/course">교과 영역</a><a href="#curriculum/extra">비교과 영역</a><a href="#curriculum/benefit">혜택 (마이크로디그리·장학금)</a>
   <h4>참여하기</h4><a href="#join/register">예비등록</a><a href="#join/guide">참여 후 이용 안내</a><a href="#join/apply">비교과 신청</a><a data-link="faq" href="#">FAQ ↗</a>
-  <h4>일정</h4><a href="#schedule/year">연간 캘린더</a><a href="#schedule/list">요약보기</a><a href="#schedule/month">월별 달력</a>
+  <h4>일정</h4><a href="#schedule/year">연간 캘린더</a><a href="#schedule/list">요약보기</a>
   <h4>소식</h4><a href="#news/notice">공지</a><a href="#news/gallery">활동 갤러리</a>
   <a class="btn btn-fill" data-link="preRegister" href="#">예비등록 하기</a>
 </nav>
@@ -1207,16 +1204,16 @@ span.cal-ev:hover{background:var(--green-100);color:var(--green-900)}
         <div class="chips sch-tools" id="sch-view" role="tablist" aria-label="보기 방식">
           <button type="button" class="chip on" data-v="year">연간 캘린더</button>
           <button type="button" class="chip" data-v="list">요약보기</button>
-          <button type="button" class="chip" data-v="month">월별 달력</button>
         </div>
-        <button type="button" class="chip sch-tools" id="sch-print">인쇄</button>
       </div>
-      <div class="chips news-filter sch-filter" id="sch-filter"><button class="chip on" data-v="">전체</button><span class="nf-sep"></span><button class="chip nf-bg" data-v="비교과">비교과 전체</button><button class="chip nf-bg sub" data-v="비교과:공모·경진대회">공모·경진대회</button><button class="chip nf-bg sub" data-v="비교과:실무역량">실무역량</button><button class="chip nf-bg sub" data-v="비교과:국제교류">국제교류</button><button class="chip nf-bg sub" data-v="비교과:현장실습">현장실습</button><button class="chip nf-bg sub" data-v="비교과:취·창업">취·창업</button><button class="chip nf-bg sub" data-v="비교과:학술·연구">학술·연구</button><span class="nf-sep"></span><button class="chip nf-cur" data-v="교과">교과</button><button class="chip nf-etc" data-v="기타">기타</button></div>
+      <div class="chips news-filter sch-filter" id="sch-filter"><button class="chip on" data-v="">전체</button><span class="nf-sep"></span><button class="chip nf-bg" data-v="비교과">비교과</button><button class="chip nf-cur" data-v="교과">교과</button><button class="chip nf-etc" data-v="기타">기타</button><span class="nf-sep"></span><button type="button" class="chip sw on" id="sch-acad" aria-pressed="true">중앙대 학사일정</button></div>
       <nav class="mbar" id="sch-mbar" aria-label="월 바로가기"></nav>
       <div id="sch-body"></div>
       <ul class="note mt24">
         <li>밑줄이 있는 제목을 누르면 공지 상세(시간·장소·신청 방법)를 볼 수 있습니다. 밑줄이 없는 일정은 아직 공지 전인 계획 일정입니다.</li>
         <li>일정은 사정에 따라 바뀔 수 있으며, 확정된 일정은 공지로 안내합니다.</li>
+        <li>회색 글씨는 중앙대학교 학부 학사일정입니다. 변경될 수 있으니 정확한 일정은 <a href="https://www.cau.ac.kr/cms/FR_CON/index.do?MENU_ID=590" target="_blank" rel="noopener">중앙대학교 학사일정</a>에서 확인해 주세요.</li>
+        <li>월 숫자 아래 점은 사업단 일정이 있는 달입니다.</li>
       </ul>
     </div>
   </section>
@@ -1382,15 +1379,206 @@ const POSTS = [
 //    title    일정 이름
 //    date     "YYYY-MM-DD"  또는 날짜 미정이면 "YYYY-MM" (예: "2027-05" → "5월 중"으로 표시)
 //    end      여러 날 일정의 마지막 날 (선택)
-//    tag      "비교과" | "교과" | "기타" | "학사"  (비우면 "비교과")
+//    tag      "비교과" | "교과" | "기타"  (비우면 "비교과")
 //    cat      비교과 유형 (비교과만, 소식과 같은 6개)
 //    time · place · note   (선택) 시간 · 장소 · 짧은 메모
 //    post     (선택) 나중에 공지를 올렸다면 그 소식의 id — 적어 두면 이 줄 대신 공지 글이 표시됩니다
 const SCHEDULE = [
   // { title: "GR 기술강습회 (1차)", date: "2027-05", cat: "실무역량", note: "세부 일정은 공지 예정" },
   // { title: "GR 전문가 초청 강연", date: "2027-04-08", time: "13:00 ~ 15:00", cat: "실무역량" },
-  // { title: "2027학년도 1학기 개강", date: "2027-03-02", tag: "학사" },
 ];
+
+// 4) 중앙대학교 학사일정 (학부) — 출처: 중앙대학교 홈페이지 > 교육 > 학사일정
+//    한 줄에 하나씩  "YYYY-MM-DD | 내용"  또는  "YYYY-MM-DD ~ YYYY-MM-DD | 내용"
+//    공휴일·대체휴일·설날·추석 등은 자동으로 빨간색 휴일로 표시됩니다
+//    새 학년도 일정이 발표되면 같은 형식으로 아래에 이어 붙이면 됩니다 (순서는 상관없음)
+const ACADEMIC = `
+2025-12-22 ~ 2026-01-14 | 2025년 동계 계절학기
+2025-12-22 ~ 2026-02-28 | 2025년 겨울방학
+2025-12-30 ~ 2026-01-04 | 2025년 2학기 성적조회
+2026-01-01 | 신정(공휴일)
+2026-01-05 | 2025년 2학기 성적확정(보관성적 이관일)/2026년 1학기 전공개방모집희망전공정정
+2026-01-05 ~ 2026-01-09 | 2026년 1학기 재입학 원서접수
+2026-01-09 ~ 2026-01-12 | 2025년 전과(부) 원서접수
+2026-01-21 ~ 2026-01-27 | 2026년 1학기 복학신청
+2026-01-21 ~ 2026-03-27 | 2026년 1학기 휴학신청
+2026-01-30 ~ 2026-02-02 | 2026년 1학기 수강신청 장바구니 담기
+2026-02-09 | 2026년 2월 학위수여자 졸업기준일
+2026-02-09 ~ 2026-02-13 | 2026년 2월 학위수여식
+2026-02-11 ~ 2026-02-13 | 2026년 1학기 수강신청
+2026-02-16 ~ 2026-02-18 | 설날
+2026-02-20 ~ 2026-02-25 | 2026년 1학기 재학생 등록
+2026-02-27 | 2026학년도 1학기 신.편입생 수강신청
+2026-03-01 | 삼일절(공휴일)
+2026-03-01 | 2026학년도 1학기 개시일
+2026-03-02 | 대체휴일
+2026-03-03 | 2026년 1학기 개강
+2026-03-03 ~ 2026-03-09 | 2026년 1학기 수강신청 정정
+2026-03-03 ~ 2026-04-27 | 유연학기 Term 1(8주)
+2026-03-24 ~ 2026-03-30 | 2026년 1학기 수강과목 취소(4주차)
+2026-03-24 ~ 2026-04-06 | 2026년 1학기 강의 Feedback 실시
+2026-04-21 ~ 2026-04-27 | 2026년 1학기 중간시험(8주차)
+2026-04-28 ~ 2026-06-22 | 유연학기 Term2(8주)
+2026-05-01 | 노동절
+2026-05-04 | 2026년 하계 계절학기 시행 공지
+2026-05-05 | 어린이날(공휴일)
+2026-05-11 ~ 2026-05-15 | 졸업논문 제출
+2026-05-13 | 부처님 오신 날
+2026-05-18 ~ 2026-05-29 | 2026년 2학기 다전공 신청 (복수, 융합, 연계, 자기설계, 부전공)
+2026-05-20 ~ 2026-05-22 | 2026년 하계 계절학기 수강신청
+2026-05-24 | 부처님오신날
+2026-05-25 | 대체휴일
+2026-05-28 ~ 2026-05-29 | 2026년 하계 계절학기 수강신청 정정
+2026-06-01 ~ 2026-06-29 | 2026년 1학기 강의평가 실시
+2026-06-01 ~ 2026-07-06 | 2026년 2학기 전공개방모집 희망전공 신청 및 정정
+2026-06-03 | 2026 지방선거일
+2026-06-04 ~ 2026-06-06 | 2026년 하계 계절학기 수강료 납부(1차)
+2026-06-06 | 현충일(공휴일)
+2026-06-10 ~ 2026-06-11 | 2026년 하계 계절학기 수강료 납부(2차)
+2026-06-16 ~ 2026-06-22 | 2026년 1학기 기말시험
+2026-06-16 ~ 2026-06-29 | 2026년 1학기 성적입력
+2026-06-23 ~ 2026-08-31 | 2026년 여름방학
+2026-06-24 ~ 2026-07-15 | 2026년 하계 계절학기
+2026-06-30 ~ 2026-07-05 | 2026년 1학기 성적조회
+2026-07-01 ~ 2026-07-07 | 2026년 2학기 재입학 원서 접수
+2026-07-02 ~ 2026-07-05 | 2026년 1학기 성적정정
+2026-07-06 | 2026년 1학기 성적확정(보관성적이관)
+2026-07-15 ~ 2026-07-19 | 2026년 하계 계절학기 강의평가 실시
+2026-07-21 ~ 2026-07-28 | 2026년 2학기 복학신청
+2026-07-21 ~ 2026-09-28 | 2026년 2학기 휴학신청
+2026-07-30 ~ 2026-08-03 | 2026년 2학기 수강신청 장바구니
+2026-08-12 ~ 2026-08-14 | 2026년 2학기 수강신청
+2026-08-15 | 광복절(공휴일)
+2026-08-17 | 대체휴일
+2026-08-21 | 2026년 8월 학위수여자 졸업기준일
+2026-08-25 ~ 2026-08-28 | 2026년 2학기 재학생 등록
+2026-08-28 | 2026학년도 2학기 신·편입학자 수강신청
+2026-09-01 | 2026년 2학기 개시일 / 2026년 2학기 개강일
+2026-09-01 ~ 2026-09-07 | 2026년 2학기 수강신청 정정
+2026-09-01 ~ 2026-10-26 | 유연학기 Term 3(8주)
+2026-09-22 ~ 2026-09-28 | 2026년 2학기 수강과목 취소(4주차)
+2026-09-22 ~ 2026-10-05 | 2026년 2학기 강의 Feedback 실시
+2026-09-24 ~ 2026-09-26 | 추석
+2026-10-03 | 개천절(공휴일)
+2026-10-05 | 대체휴일
+2026-10-09 | 한글날(공휴일)
+2026-10-17 | 개교110주년
+2026-10-20 ~ 2026-10-26 | 2026년 2학기 중간시험(8주차)
+2026-10-27 ~ 2026-12-21 | 유연학기 Term 4(8주)
+2026-11-02 | 2026년 동계 계절학기 시행 공지
+2026-11-09 ~ 2026-11-13 | 졸업논문 제출
+2026-11-16 ~ 2026-11-27 | 2027년 1학기 다전공 신청 (복수,융합,연계,자기설계,부전공)
+2026-11-18 ~ 2026-11-20 | 2026년 동계 계절학기 수강신청
+2026-11-26 ~ 2026-11-27 | 2026년 동계 계절학기 수강신청 정정
+2026-12-01 ~ 2026-12-28 | 2026년 2학기 강의평가 실시
+2026-12-01 ~ 2027-01-04 | 2027년 1학기 전공개방모집 희망전공 신청 및 정정
+2026-12-02 ~ 2026-12-04 | 2026년 동계 계절학기 수강료 납부(1차)
+2026-12-09 ~ 2026-12-10 | 2026년 동계 계절학기 수강료 납부(2차)
+2026-12-15 ~ 2026-12-21 | 2026년 2학기 기말시험(16주차)
+2026-12-15 ~ 2026-12-28 | 2026년 2학기 성적입력
+2026-12-22 ~ 2027-02-28 | 2026년 겨울방학
+2026-12-23 ~ 2027-01-15 | 2026년 동계 계절학기
+2026-12-25 | 성탄절(공휴일)
+2026-12-29 ~ 2027-01-03 | 2026년 2학기 성적조회
+2026-12-31 ~ 2027-01-03 | 2026년 2학기 성적정정
+2027-01-01 | 신정(공휴일)
+2027-01-04 | 2026학년도 2학기 성적확정(보관성적 이관일)
+2027-01-04 ~ 2027-01-08 | 2027학년도 1학기 재입학 원서접수
+2027-01-08 ~ 2027-01-11 | 2027학년도 전과(부) 원서접수
+2027-01-21 ~ 2027-01-28 | 2027학년도 1학기 복학신청
+2027-01-21 ~ 2027-03-29 | 2027학년도 1학기 휴학신청
+2027-02-02 ~ 2027-02-04 | 2027학년도 1학기 수강신청 장바구니 담기
+2027-02-06 ~ 2027-02-09 | 설날
+2027-02-15 ~ 2027-02-19 | 2027년 2월 학위수여식 (졸업기준일: 2월 15일)
+2027-02-17 ~ 2027-02-19 | 2027학년도 1학기 수강신청
+2027-02-19 ~ 2027-02-24 | 2027학년도 1학기 재학생 등록
+2027-02-26 | 2027학년도 1학기 신·편입학자 수강신청
+2027-03-01 | 삼일절(공휴일)
+2027-03-01 | 2027학년도 1학기 개시일
+2027-03-02 | 2027학년도 1학기 개강일
+2027-03-02 ~ 2027-03-08 | 2027학년도 1학기 수강신청 정정
+2027-03-02 ~ 2027-04-26 | 유연학기 Term 1(8주)
+2027-03-23 ~ 2027-03-29 | 2027학년도 1학기 수강과목 취소(4주차)
+2027-03-23 ~ 2027-04-05 | 2027학년도 1학기 강의 Feedback 실시
+2027-04-20 ~ 2027-04-26 | 2027학년도 1학기 중간시험(8주차)
+2027-04-27 ~ 2027-06-21 | 유연학기 Term 2(8주)
+2027-05-01 | 노동절
+2027-05-03 | 대체휴일(노동절)
+2027-05-04 | 2027학년도 하계 계절학기 시행 공지
+2027-05-05 | 어린이날(공휴일)
+2027-05-10 ~ 2027-05-14 | 졸업논문 제출
+2027-05-13 | 부처님 오신 날
+2027-05-17 ~ 2027-05-28 | 2027학년도 2학기 다전공 신청(복수,융합,연계,자기설계,부전공)
+2027-06-01 ~ 2027-06-28 | 2027학년도 1학기 강의평가 실시
+2027-06-01 ~ 2027-07-05 | 2027학년도 2학기 전공개방모집 희망전공 신청 및 정정
+2027-06-06 | 현충일(공휴일)
+2027-06-15 ~ 2027-06-21 | 2027학년도 1학기 기말시험(16주차)
+2027-06-15 ~ 2027-06-28 | 2027학년도 1학기 성적입력
+2027-06-22 ~ 2027-08-31 | 2027학년도 여름방학
+2027-06-23 ~ 2027-07-14 | 2027학년도 하계 계절학기
+2027-06-29 ~ 2027-07-04 | 2027학년도 1학기 성적조회
+2027-07-01 ~ 2027-07-04 | 2027학년도 1학기 성적정정
+2027-07-01 ~ 2027-07-07 | 2027학년도 2학기 재입학 원서 접수
+2027-07-05 | 2027학년도 1학기 성적확정(보관성적이관)
+2027-07-17 | 제헌절
+2027-07-19 | 대체휴일(제헌절)
+2027-07-21 ~ 2027-07-27 | 2027학년도 2학기 복학신청
+2027-07-21 ~ 2027-09-28 | 2027학년도 2학기 휴학신청
+2027-07-29 ~ 2027-08-02 | 2027학년도 2학기 수강신청 바구니
+2027-08-10 ~ 2027-08-12 | 2027학년도 2학기 수강신청
+2027-08-15 | 광복절(공휴일)
+2027-08-16 | 대체휴일(광복절)
+2027-08-20 | 2027년 8월 졸업기준일
+2027-08-24 ~ 2027-08-27 | 2027학년도 2학기 재학생 등록
+2027-08-30 | 2027학년도 2학기 신·편입학자 수강신청
+2027-09-01 | 2027학년도 2학기 개시일 및 개강일
+2027-09-01 ~ 2027-09-07 | 2027학년도 2학기 수강신청 정정
+2027-09-01 ~ 2027-10-26 | 유연학기 Term 3(8주)
+2027-09-14 ~ 2027-09-16 | 추석
+2027-09-22 ~ 2027-09-28 | 2027학년도 2학기 수강과목 취소(4주차)
+2027-09-22 ~ 2027-10-05 | 2027학년도 2학기 강의 Feedback 실시
+2027-10-03 | 개천절(공휴일)
+2027-10-04 | 대체휴일(개천절)
+2027-10-09 | 한글날(공휴일)
+2027-10-11 | 대체휴일(한글날)
+2027-10-17 | 개교111주년
+2027-10-20 ~ 2027-10-26 | 2027학년도 2학기 중간시험(8주차)
+2027-10-27 ~ 2027-12-21 | 유연학기 Term 4(8주)
+2027-11-01 | 2027학년도 동계 계절학기 시행 공지
+2027-11-08 ~ 2027-11-12 | 졸업논문 제출
+2027-11-15 ~ 2027-11-26 | 2028학년도 1학기 다전공 신청(복수,융합,연계,자기설계,부전공)
+2027-12-01 ~ 2027-12-28 | 2027학년도 2학기 강의평가 실시
+2027-12-01 ~ 2028-01-03 | 2028학년도 1학기 전공개방모집 희망전공 신청 및 정정
+2027-12-15 ~ 2027-12-21 | 2027학년도 2학기 기말시험(16주차)
+2027-12-15 ~ 2027-12-28 | 2027학년도 2학기 성적입력
+2027-12-22 ~ 2028-02-29 | 2027학년도 겨울방학
+2027-12-23 ~ 2028-01-02 | 2027학년도 2학기 성적조회
+2027-12-23 ~ 2028-01-14 | 2027학년도 동계 계절학기
+2027-12-25 | 성탄절(공휴일)
+2027-12-27 | 대체휴일(성탄절)
+2027-12-30 ~ 2028-01-02 | 2027학년도 2학기 성적정정
+2028-01-01 | 신정(공휴일)
+2028-01-03 | 2027학년도 2학기 성적확정(보관성적 이관일)
+2028-01-03 ~ 2028-01-07 | 2028학년도 1학기 재입학 원서접수
+2028-01-07 ~ 2028-01-10 | 2028학년도 전과(부) 원서접수
+2028-01-18 ~ 2028-01-25 | 2028학년도 1학기 복학신청
+2028-01-18 ~ 2028-03-30 | 2028학년도 1학기 휴학신청
+2028-01-26 ~ 2028-01-28 | 설날
+2028-02-01 ~ 2028-02-03 | 2028학년도 1학기 수강신청 장바구니 담기
+2028-02-14 ~ 2028-02-18 | 2028학년도 2학기 학위수여식(졸업기준일: 2월 14일)
+2028-02-15 ~ 2028-02-17 | 2028학년도 1학기 수강신청
+2028-02-22 ~ 2028-02-25 | 2028학년도 1학기 재학생 등록
+2028-02-28 | 2028학년도 1학기 신·편입학자 수강신청
+2028-03-01 | 삼일절(공휴일)
+2028-05-01 | 노동절
+2028-05-05 | 어린이날(공휴일)
+2028-05-13 | 부처님 오신 날
+2028-06-06 | 현충일(공휴일)
+2028-08-15 | 광복절(공휴일)
+2028-10-03 | 개천절(공휴일)
+2028-10-09 | 한글날(공휴일)
+2028-12-25 | 성탄절(공휴일)
+`;
 
 /* =========================================================
    아래는 동작 코드입니다 (수정 불필요)
@@ -1450,11 +1638,12 @@ const SCHEDULE = [
   }));
   renderNews();
 
-  // ---------- 일정 (연간 캘린더 · 요약보기 · 월별 달력) ----------
+  // ---------- 일정 (연간 캘린더 · 요약보기) ----------
   const MON_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const pad = n=>String(n).padStart(2,'0');
   const calIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>';
   const postIds = new Set(P.map(p=>p.id));
+  const HOLI = /공휴일|대체휴일|^설날|^추석|노동절|부처님|제헌절|선거일|성탄절|신정/;
   function parseD(v){ const m=String(v||'').match(/(\d{4})\D+(\d{1,2})(?:\D+(\d{1,2}))?/); return m?{y:+m[1],m:+m[2]-1,d:m[3]?+m[3]:0}:null; }
   const E = [
     ...P.filter(p=>p.st).map(p=>({...p, href:'#post/'+p.id, tbd:false, note:''})),
@@ -1466,35 +1655,42 @@ const SCHEDULE = [
       const en = tbd ? new Date(a.y,a.m+1,0) : (b&&b.d ? new Date(b.y,b.m,b.d) : st);
       return { title:x.title||'', tag:x.tag||'비교과', cat:x.cat||'', type:x.type||'', time:x.time||'', place:x.place||'', note:x.note||'',
                st, en:en<st?st:en, sk:dayKey(st), ek:dayKey(en<st?st:en), tbd, href:'', photos:[] };
+    }).filter(Boolean),
+    ...(typeof ACADEMIC!=='undefined'?ACADEMIC:'').split('\n').map(line=>{
+      const [d, ...t] = line.split('|'); const title = t.join('|').trim(); if(!title) return null;
+      const [a,b] = d.split('~').map(parseD); if(!a || !a.d) return null;
+      const st = new Date(a.y,a.m,a.d), en = b&&b.d ? new Date(b.y,b.m,b.d) : st;
+      return { title, tag:'학사', cat:'', type:'', time:'', place:'', note:'', st, en, sk:dayKey(st), ek:dayKey(en), tbd:false, href:'', photos:[],
+               acad:true, hol:HOLI.test(title) };
     }).filter(Boolean)
   ].sort((a,b)=>a.st-b.st);
   E.forEach((e,i)=>e.i=i);
-  if(E.some(e=>e.tag==='학사')) $('#sch-filter').insertAdjacentHTML('beforeend','<button class="chip nf-acad" data-v="학사">학사</button>');
 
   const thisY = today.getFullYear();
-  const years = E.map(e=>e.st.getFullYear()).concat(E.map(e=>e.en.getFullYear()));
-  const minY = Math.min(thisY, ...years), maxY = Math.max(thisY+1, ...years);
-  let sy = thisY, sv = 'year', cm = today.getMonth(), sf = '';
+  const minY = Math.min(thisY, ...E.map(e=>e.en.getFullYear())), maxY = Math.max(thisY+1, ...E.map(e=>e.st.getFullYear()));
+  let sy = thisY, sv = 'year', sf = '', showAcad = true;
 
   const mKeys = (y,m)=>[dayKey(new Date(y,m,1)), dayKey(new Date(y,m+1,0))];
   const inMonth = (e,y,m)=>{ const [k1,k2]=mKeys(y,m); return e.ek>=k1 && e.sk<=k2; };
-  const sortIn = (a,b)=>(a.tbd-b.tbd)||(a.sk-b.sk)||(a.ek-b.ek);
+  // 그 달에 시작하는 일정 먼저(날짜순), 앞 달에서 이어지는 일정은 뒤로 (중앙대 학사일정과 같은 방식)
+  const sortBy = k1=>(a,b)=>((a.sk<k1)-(b.sk<k1))||(a.tbd-b.tbd)||(a.sk-b.sk)||(a.ek-b.ek);
   const md = x=>`${x.getFullYear()!==sy?x.getFullYear()+'.':''}${pad(x.getMonth()+1)}.${pad(x.getDate())}(${DOW[x.getDay()]})`;
   const evDate = e=>e.tbd ? `${e.st.getMonth()+1}월 중 <span class="small">(날짜 미정)</span>` : md(e.st)+(e.ek!==e.sk?' ~ '+md(e.en):'');
-  const evBadge = e=>e.tbd ? (e.sk>tk?'<span class="st">예정</span>':e.ek<tk?'<span class="st done">완료</span>':'') : badge(e);
-  const evTitle = e=>`<span class="tag${tagCls(e.tag)}">${esc(tagTxt(e))}</span>${e.href?`<a href="${e.href}">${esc(e.title)}</a>`:esc(e.title)}${evBadge(e)}`;
+  const evBadge = e=>e.acad ? '' : e.tbd ? (e.sk>tk?'<span class="st">예정</span>':e.ek<tk?'<span class="st done">완료</span>':'') : badge(e);
+  const evTitle = e=>`<span class="tag${e.hol?' tg-hol':tagCls(e.tag)}">${e.hol?'휴일':esc(tagTxt(e))}</span>${e.href?`<a href="${e.href}">${esc(e.title)}</a>`:esc(e.title)}${evBadge(e)}`;
   const evMeta = e=>[e.type,e.time,e.place,e.note].filter(Boolean).map(esc).join(' · ');
-  const rowY = e=>{ const m=evMeta(e); return `<li data-e="${e.i}"><div class="tt">${evTitle(e)}</div><span class="dt">${calIco}${evDate(e)}</span>${m?`<span class="mm">${m}</span>`:''}</li>`; };
+  const rowY = e=>{ const m=evMeta(e); return `<li data-e="${e.i}"${e.acad?` class="ac${e.hol?' ho':''}"`:''}><div class="tt">${evTitle(e)}</div><span class="dt">${calIco}${evDate(e)}</span>${m?`<span class="mm">${m}</span>`:''}</li>`; };
 
   function viewYear(list){
     let h = '';
     for(let m=0;m<12;m++){
       const first = new Date(sy,m,1), last = new Date(sy,m+1,0), k1 = dayKey(first);
-      const evs = list.filter(e=>inMonth(e,sy,m)).sort(sortIn);
+      const evs = list.filter(e=>inMonth(e,sy,m)).sort(sortBy(k1));
       let mini = DOW.map((x,i)=>`<span class="w${i===0?' sun':i===6?' sat':''}">${x}</span>`).join('') + '<span></span>'.repeat(first.getDay());
       for(let d=1; d<=last.getDate(); d++){
-        const k = k1+d-1, dw = (first.getDay()+d-1)%7, on = evs.filter(e=>!e.tbd && k>=e.sk && k<=e.ek);
-        mini += `<span class="d${dw===0?' sun':dw===6?' sat':''}${on.length?' ev':''}${k===tk?' today':''}" data-k="${k}"${on.length?` title="${esc(on.map(e=>e.title).join('\n'))}"`:''}>${d}</span>`;
+        const k = k1+d-1, dw = (first.getDay()+d-1)%7, here = evs.filter(e=>!e.tbd && k>=e.sk && k<=e.ek);
+        const on = here.filter(e=>!e.acad), hol = here.find(e=>e.hol), tip = on.concat(hol?[hol]:[]);
+        mini += `<span class="d${dw===0||hol?' sun':dw===6?' sat':''}${on.length?' ev':''}${hol?' hol':''}${k===tk?' today':''}" data-k="${k}"${tip.length?` title="${esc(tip.map(e=>e.title).join('\n'))}"`:''}>${d}</span>`;
       }
       h += `<section class="ym" id="sch-m${m+1}"><div><div class="ym-head"><b>${pad(m+1)}</b><span>${MON_EN[m]}</span></div><div class="mini" aria-hidden="true">${mini}</div></div>
         ${evs.length?`<ul class="yl">${evs.map(rowY).join('')}</ul>`:'<p class="yl-none">등록된 일정이 없습니다.</p>'}</section>`;
@@ -1504,72 +1700,47 @@ const SCHEDULE = [
   function viewList(list){
     let h = '';
     for(let m=0;m<12;m++){
-      const evs = list.filter(e=>inMonth(e,sy,m)).sort(sortIn); if(!evs.length) continue;
+      const evs = list.filter(e=>inMonth(e,sy,m)).sort(sortBy(mKeys(sy,m)[0])); if(!evs.length) continue;
       h += `<div class="ys-m" id="sch-m${m+1}"><h4>${pad(m+1)}<small>${MON_EN[m]}</small></h4><div>${evs.map(e=>{ const mt=evMeta(e);
-        return `<div class="ys-r"><span class="dt">${calIco}${evDate(e)}</span><div class="tt">${evTitle(e)}${mt?`<small>${mt}</small>`:''}</div></div>`; }).join('')}</div></div>`;
+        return `<div class="ys-r${e.acad?' ac'+(e.hol?' ho':''):''}" data-e="${e.i}"><span class="dt">${calIco}${evDate(e)}</span><div class="tt">${evTitle(e)}${mt?`<small>${mt}</small>`:''}</div></div>`; }).join('')}</div></div>`;
     }
     return h ? `<div class="ys">${h}</div>` : `<div class="embed mt16"><div class="embed-empty">${sy}년에 등록된 일정이 없습니다.</div></div>`;
   }
-  function viewMonth(list){
-    const first = new Date(sy,cm,1), last = new Date(sy,cm+1,0);
-    const cells = Math.ceil((first.getDay()+last.getDate())/7)*7;
-    let g = DOW.map((x,i)=>`<div class="cal-dow${i===0?' sun':i===6?' sat':''}">${x}</div>`).join('');
-    for(let i=0;i<cells;i++){
-      const d = new Date(sy, cm, 1-first.getDay()+i), k = dayKey(d);
-      const evs = list.filter(e=>!e.tbd && k>=e.sk && k<=e.ek);
-      g += `<div class="cal-day${d.getMonth()!==cm?' out':''}${k===tk?' today':''}"><span class="n">${d.getDate()}</span>${
-        evs.map(e=>{ const c=`cal-ev${tagCls(e.tag)}${e.photos.length?' has-ph':''}`, t=esc(e.title);
-          return e.href?`<a class="${c}" href="${e.href}" title="${t}">${t}</a>`:`<span class="${c}" title="${t}">${t}</span>`; }).join('')}</div>`;
-    }
-    const mev = list.filter(e=>inMonth(e,sy,cm)).sort(sortIn);
-    return `<div class="cal sch-month"><div class="cal-bar"><h4>${sy}년 ${cm+1}월</h4>
-        <button type="button" class="cal-btn today-btn" data-m="0">오늘</button>
-        <button type="button" class="cal-btn" data-m="-1" aria-label="이전 달">‹</button>
-        <button type="button" class="cal-btn" data-m="1" aria-label="다음 달">›</button></div>
-      <div class="cal-grid">${g}</div>
-      <div class="cal-list"><p class="lbl">${cm+1}월 일정</p>${mev.length?`<ul class="yl">${mev.map(rowY).join('')}</ul>`:'<p class="soft small">이 달에 등록된 일정이 없습니다.</p>'}</div></div>`;
-  }
   function renderSch(){
     const [ft,fc] = sf.split(':');
-    const list = sf ? E.filter(e=>e.tag===ft && (!fc || e.cat===fc)) : E;
+    const list = E.filter(e=>e.acad ? showAcad : (!sf || (e.tag===ft && (!fc || e.cat===fc))));
     $('#sch-year').textContent = sy;
     $$('.yr-sel [data-y]').forEach(b=>b.disabled = +b.dataset.y<0 ? sy<=minY : sy>=maxY);
     $$('#sch-view .chip').forEach(b=>{ b.classList.toggle('on', b.dataset.v===sv); b.setAttribute('aria-selected', b.dataset.v===sv); });
     $('#sch-mbar').innerHTML = MON_EN.map((x,m)=>{
-      const on = sv==='month' ? m===cm : (sy===thisY && m===today.getMonth());
-      const has = list.some(e=>inMonth(e,sy,m));
-      return `<button type="button" data-mon="${m}" class="${on?'on':''}${has?' has':''}" aria-label="${m+1}월${has?' (일정 있음)':''}"><span>${m+1}</span><i></i></button>`;
+      const on = sy===thisY && m===today.getMonth();
+      const has = list.some(e=>!e.acad && inMonth(e,sy,m));
+      return `<button type="button" data-mon="${m}" class="${on?'on':''}${has?' has':''}" aria-label="${m+1}월${has?' (사업단 일정 있음)':''}"><span>${m+1}</span><i></i></button>`;
     }).join('');
-    $('#sch-body').innerHTML = sv==='list' ? viewList(list) : sv==='month' ? viewMonth(list) : viewYear(list);
+    $('#sch-body').innerHTML = sv==='list' ? viewList(list) : viewYear(list);
   }
   const schHash = ()=>history.replaceState(null,'',`#schedule/${sv}${sy!==thisY?'/'+sy:''}`);
   function openSchedule(v, y){
-    if(['year','list','month'].includes(v)) sv = v;
-    if(+y>=minY && +y<=maxY && +y!==sy){ sy = +y; cm = sy===thisY ? today.getMonth() : 0; }
+    sv = v==='list' ? 'list' : 'year';
+    if(+y>=minY && +y<=maxY) sy = +y;
     renderSch();
   }
   $('.yr-sel').addEventListener('click',e=>{
     const b = e.target.closest('[data-y]'); if(!b || b.disabled) return;
-    sy += +b.dataset.y; cm = sy===thisY ? today.getMonth() : 0; renderSch(); schHash();
+    sy += +b.dataset.y; renderSch(); schHash();
   });
   $$('#sch-view .chip').forEach(b=>b.addEventListener('click',()=>{ sv = b.dataset.v; renderSch(); schHash(); }));
-  $$('#sch-filter .chip').forEach(b=>b.addEventListener('click',()=>{
-    sf = b.dataset.v; $$('#sch-filter .chip').forEach(x=>x.classList.toggle('on',x===b)); renderSch();
+  $$('#sch-filter .chip[data-v]').forEach(b=>b.addEventListener('click',()=>{
+    sf = b.dataset.v; $$('#sch-filter .chip[data-v]').forEach(x=>x.classList.toggle('on',x===b)); renderSch();
   }));
-  $('#sch-print').addEventListener('click',()=>window.print());
+  $('#sch-acad').addEventListener('click',e=>{
+    showAcad = !showAcad; e.currentTarget.classList.toggle('on',showAcad); e.currentTarget.setAttribute('aria-pressed',showAcad); renderSch();
+  });
   $('#sch-mbar').addEventListener('click',e=>{
     const b = e.target.closest('[data-mon]'); if(!b) return;
     const m = +b.dataset.mon;
-    if(sv==='month'){ cm = m; renderSch(); return; }
     const el = document.getElementById('sch-m'+(m+1));
     el ? el.scrollIntoView({behavior:'smooth'}) : showToast(`${m+1}월에는 등록된 일정이 없습니다`);
-  });
-  $('#sch-body').addEventListener('click',e=>{
-    const b = e.target.closest('[data-m]'); if(!b) return;
-    const m = +b.dataset.m;
-    if(m===0){ sy = thisY; cm = today.getMonth(); }
-    else { const d = new Date(sy,cm+m,1); if(d.getFullYear()<minY || d.getFullYear()>maxY) return; sy = d.getFullYear(); cm = d.getMonth(); }
-    renderSch(); schHash();
   });
   // 연간 캘린더: 일정에 마우스를 올리면 해당 날짜를 달력에서 강조
   const hlDays = (li,on)=>{
